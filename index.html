@@ -7,438 +7,608 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#a50034;
-  --accent:#ffcc00;
-  --accent-dark:#c9a000;
-  --btn:#ff6b35;
-  --btn-dark:#d4531f;
-  --nav:#7a0026;
-  --green:#58cc02;--green-dark:#46a302;--green-light:#d7ffb8;
-  --red:#ff4b4b;--red-light:#ffdfe0;
-  --yellow:#ffc800;--muted:#afafaf;
-  --card:#fff;--text:#3c3c3c;
-  --radius:16px;
+  --bg:#a50034;--nav:#7a0026;
+  --acc:#ffcc00;--acc-d:#c9a000;
+  --btn:#ff6b35;--btn-d:#d4531f;
+  --green:#58cc02;--gd:#46a302;--gl:#d7ffb8;
+  --red:#ff4b4b;--rl:#ffdfe0;
+  --yel:#ffc800;--mut:#afafaf;--r:16px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Quicksand',sans-serif;background:var(--bg);min-height:100vh;}
-/* ── TOP BAR ── */
-.topbar{width:100%;background:var(--nav);display:flex;align-items:center;gap:12px;padding:12px 20px;position:sticky;top:0;z-index:100;border-bottom:3px solid rgba(255,255,255,.1)}
-.flag{font-size:1.6rem}
-.lang-name{color:rgba(255,255,255,.7);font-weight:800;font-size:.8rem;letter-spacing:1px;flex-shrink:0}
-.progress-wrap{flex:1;height:14px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}
-.progress-bar{height:100%;background:var(--accent);border-radius:999px;transition:width .5s cubic-bezier(.34,1.56,.64,1)}
-.hearts{display:flex;gap:3px;font-size:1.2rem;flex-shrink:0}
-.xp-badge{background:var(--accent);color:rgba(0,0,0,.7);font-weight:900;font-size:.8rem;padding:4px 10px;border-radius:999px;flex-shrink:0}
+/* ── TOPBAR ── */
+.topbar{width:100%;background:var(--nav);display:flex;align-items:center;gap:10px;padding:11px 18px;position:sticky;top:0;z-index:100;border-bottom:3px solid rgba(255,255,255,.1)}
+.flag{font-size:1.5rem}.lname{color:rgba(255,255,255,.65);font-weight:800;font-size:.75rem;letter-spacing:1px;flex-shrink:0}
+.pw{flex:1;height:13px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}
+.pb{height:100%;background:var(--acc);border-radius:999px;transition:width .5s cubic-bezier(.34,1.56,.64,1)}
+.hts{display:flex;gap:3px;font-size:1.1rem;flex-shrink:0}
+.xpb{background:var(--acc);color:rgba(0,0,0,.7);font-weight:900;font-size:.75rem;padding:3px 9px;border-radius:999px;flex-shrink:0}
 /* ── LAYOUT ── */
-.page{max-width:640px;margin:0 auto;padding:24px 16px 60px}
-/* ── CARD ── */
-.card{background:var(--card);border-radius:24px;padding:28px 24px;box-shadow:0 8px 40px rgba(0,0,0,.3);animation:slideUp .35s ease}
-@keyframes slideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-/* ── SECTION TITLE ── */
-.section-lbl{color:rgba(255,255,255,.55);font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
-/* ── LESSON BUTTONS ── */
-.lesson-list{display:flex;flex-direction:column;gap:12px;margin-top:8px}
-.lesson-btn{background:var(--card);border-radius:20px;padding:16px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;border:3px solid transparent;transition:all .2s;box-shadow:0 6px 0 rgba(0,0,0,.3);outline:none}
-.lesson-btn:hover{transform:translateY(-3px);box-shadow:0 9px 0 rgba(0,0,0,.3)}
-.lesson-btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.3)}
-.lesson-btn.done{border-color:var(--accent)}
-.lesson-btn.locked{opacity:.45;pointer-events:none;filter:grayscale(.9)}
-.l-icon{font-size:2.3rem;width:50px;text-align:center;flex-shrink:0}
-.l-info{flex:1;min-width:0}
-.l-title{font-family:'Pacifico',sans-serif;font-size:1.2rem;color:var(--bg);line-height:1.2}
-.l-sub{font-size:.8rem;color:var(--muted);margin-top:3px}
-.l-stars{color:var(--yellow);font-size:.95rem;margin-top:4px}
-.l-arr{font-size:1.4rem;color:var(--muted);flex-shrink:0}
-/* ── LESSON HEADER ── */
-.lesson-hdr{text-align:center;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid #f0f0f0}
-.lesson-hdr .lh-icon{font-size:3rem;margin-bottom:6px}
-.lesson-hdr .lh-title{font-family:'Pacifico',sans-serif;font-size:1.6rem;color:var(--bg)}
-.lesson-hdr .lh-sub{font-size:.85rem;color:var(--muted);margin-top:4px}
-.ex-badge{display:inline-block;background:rgba(0,0,0,.06);color:var(--bg);font-weight:800;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:999px;margin-bottom:12px}
-/* ── QUESTION ── */
-.question{font-size:1.15rem;font-weight:800;color:var(--text);margin-bottom:18px;line-height:1.45}
-/* ── OPTIONS GRID ── */
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px}
-.opt{background:#fff;border:2.5px solid #e5e5e5;border-radius:var(--radius);padding:13px 15px;font-family:'Quicksand',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);cursor:pointer;transition:all .12s;text-align:left;box-shadow:0 4px 0 #e5e5e5;outline:none}
+.page{max-width:680px;margin:0 auto;padding:20px 14px 60px}
+.card{background:#fff;border-radius:22px;padding:26px 22px;box-shadow:0 8px 40px rgba(0,0,0,.3);animation:su .35s ease;margin-bottom:16px}
+@keyframes su{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+/* ── HOME ── */
+.slbl{color:rgba(255,255,255,.5);font-size:.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.llist{display:flex;flex-direction:column;gap:11px;margin-top:6px}
+.lbtn{background:#fff;border-radius:18px;padding:14px 18px;display:flex;align-items:center;gap:13px;cursor:pointer;border:3px solid transparent;transition:all .2s;box-shadow:0 6px 0 rgba(0,0,0,.3);outline:none;width:100%;text-align:left}
+.lbtn:hover{transform:translateY(-3px);box-shadow:0 9px 0 rgba(0,0,0,.3)}
+.lbtn.done{border-color:var(--acc)}
+.lbtn.locked{opacity:.4;pointer-events:none;filter:grayscale(.9)}
+.li{font-size:2.2rem;width:48px;text-align:center;flex-shrink:0}
+.linf{flex:1;min-width:0}
+.lt{font-family:'Pacifico',sans-serif;font-size:1.15rem;color:var(--bg);line-height:1.2}
+.ls{font-size:.78rem;color:var(--mut);margin-top:2px}
+.lstar{color:var(--yel);font-size:.9rem;margin-top:3px}
+.lbtns{display:flex;gap:8px;margin-top:8px}
+.go-ex{flex:1;padding:9px;background:var(--acc);color:rgba(0,0,0,.7);border:none;border-radius:10px;font-family:'Quicksand',sans-serif;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 3px 0 var(--acc-d);transition:all .12s;outline:none}
+.go-ex:active{transform:translateY(3px);box-shadow:none}
+.go-games{flex:1;padding:9px;background:var(--btn);color:#fff;border:none;border-radius:10px;font-family:'Quicksand',sans-serif;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 3px 0 var(--btn-d);transition:all .12s;outline:none}
+.go-games:active{transform:translateY(3px);box-shadow:none}
+/* ── EXERCISE ── */
+.lhdr{text-align:center;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid #f0f0f0}
+.lhi{font-size:2.8rem;margin-bottom:5px}
+.lht{font-family:'Pacifico',sans-serif;font-size:1.5rem;color:var(--bg)}
+.lhs{font-size:.82rem;color:var(--mut);margin-top:3px}
+.exb{display:inline-block;background:rgba(0,0,0,.06);color:var(--bg);font-weight:800;font-size:.68rem;letter-spacing:1px;text-transform:uppercase;padding:3px 11px;border-radius:999px;margin-bottom:11px}
+.q{font-size:1.1rem;font-weight:800;color:#3c3c3c;margin-bottom:16px;line-height:1.45}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.opt{background:#fff;border:2.5px solid #e5e5e5;border-radius:var(--r);padding:12px 14px;font-family:'Quicksand',sans-serif;font-size:.92rem;font-weight:700;color:#3c3c3c;cursor:pointer;transition:all .12s;text-align:left;box-shadow:0 4px 0 #e5e5e5;outline:none}
 .opt:hover:not(:disabled){background:#f7f7f7;border-color:#bbb;transform:translateY(-1px)}
-.opt:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #e5e5e5}
-.opt.correct{background:var(--green-light)!important;border-color:var(--green)!important;color:var(--green-dark)!important;box-shadow:0 4px 0 var(--green-dark)!important}
-.opt.wrong{background:var(--red-light)!important;border-color:var(--red)!important;color:var(--red)!important;box-shadow:0 4px 0 #c03!important;animation:shake .3s}
-.opt.dim{opacity:.4;pointer-events:none}
+.opt.correct{background:var(--gl)!important;border-color:var(--green)!important;color:var(--gd)!important;box-shadow:0 4px 0 var(--gd)!important}
+.opt.wrong{background:var(--rl)!important;border-color:var(--red)!important;color:var(--red)!important;animation:shake .3s}
+.opt.dim{opacity:.38;pointer-events:none}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-/* ── LISTEN BTN ── */
-.listen-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--btn);color:#fff;border:none;border-radius:var(--radius);padding:14px 26px;font-family:'Quicksand',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 4px 0 var(--btn-dark);transition:all .12s;margin:0 auto 18px;width:auto}
-.listen-btn:active{transform:translateY(4px);box-shadow:none}
-/* ── FILL ── */
-.fill-wrap{font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:14px;line-height:2}
-.blank{border:none;border-bottom:3px solid var(--btn);background:transparent;font-size:1.2rem;font-weight:800;font-family:'Quicksand',sans-serif;color:var(--bg);width:110px;text-align:center;outline:none;padding:2px 4px}
-.blank.correct{border-color:var(--green);color:var(--green-dark)}
+.lisbtn{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--btn);color:#fff;border:none;border-radius:var(--r);padding:13px 24px;font-family:'Quicksand',sans-serif;font-weight:800;font-size:.95rem;cursor:pointer;box-shadow:0 4px 0 var(--btn-d);transition:all .12s;margin:0 auto 16px}
+.lisbtn:active{transform:translateY(4px);box-shadow:none}
+.fw{font-size:1.15rem;font-weight:800;color:#3c3c3c;margin-bottom:13px;line-height:2}
+.blank{border:none;border-bottom:3px solid var(--btn);background:transparent;font-size:1.15rem;font-weight:800;font-family:'Quicksand',sans-serif;color:var(--bg);width:105px;text-align:center;outline:none;padding:2px}
+.blank.correct{border-color:var(--green);color:var(--gd)}
 .blank.wrong{border-color:var(--red);color:var(--red);animation:shake .3s}
-/* ── WORD ORDER ── */
-.wo-dropzone{min-height:52px;border-bottom:3px solid #ccc;display:flex;flex-wrap:wrap;gap:7px;align-items:flex-end;padding-bottom:8px;margin-bottom:14px}
-.wo-bank{display:flex;flex-wrap:wrap;gap:7px;background:#f7f7f7;border-radius:12px;padding:10px;min-height:48px;margin-bottom:14px}
-.chip{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:7px 13px;font-weight:700;font-family:'Quicksand',sans-serif;cursor:pointer;transition:all .12s;box-shadow:0 2px 0 #e0e0e0;font-size:.9rem;outline:none}
+.wdrop{min-height:50px;border-bottom:3px solid #ccc;display:flex;flex-wrap:wrap;gap:6px;align-items:flex-end;padding-bottom:7px;margin-bottom:12px}
+.wbank{display:flex;flex-wrap:wrap;gap:6px;background:#f7f7f7;border-radius:11px;padding:9px;min-height:46px;margin-bottom:12px}
+.chip{background:#fff;border:2px solid #e0e0e0;border-radius:9px;padding:6px 12px;font-weight:700;font-family:'Quicksand',sans-serif;cursor:pointer;transition:all .12s;box-shadow:0 2px 0 #e0e0e0;font-size:.88rem;outline:none}
 .chip:hover:not(.ghost){border-color:#bbb;transform:translateY(-2px)}
-.chip.placed{background:var(--btn);color:#fff;border-color:var(--btn-dark);box-shadow:0 2px 0 var(--btn-dark)}
-.chip.ghost{opacity:.25;pointer-events:none}
-/* ── MATCH ── */
-.match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px}
-.match-col{display:flex;flex-direction:column;gap:7px}
-.match-btn{background:#fff;border:2px solid #e5e5e5;border-radius:12px;padding:11px 13px;font-weight:700;font-family:'Quicksand',sans-serif;cursor:pointer;transition:all .12s;box-shadow:0 3px 0 #e5e5e5;text-align:center;font-size:.9rem;outline:none}
-.match-btn:hover{border-color:#bbb}
-.match-btn.sel{background:#e8f4fd;border-color:var(--btn);color:var(--bg)}
-.match-btn.hit{background:var(--green-light);border-color:var(--green);color:var(--green-dark);pointer-events:none}
-.match-btn.miss{background:var(--red-light);border-color:var(--red);animation:shake .3s}
-/* ── FEEDBACK ── */
-.feedback{border-radius:14px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;gap:10px;font-weight:800;font-size:.95rem}
-.feedback.ok{background:var(--green-light);color:var(--green-dark);border:2px solid var(--green)}
-.feedback.ko{background:var(--red-light);color:var(--red);border:2px solid var(--red)}
-.fb-icon{font-size:1.6rem}
-.fb-hint{font-weight:600;font-size:.82rem;margin-top:2px}
-/* ── CONTINUE BTN ── */
-.continue-btn{width:100%;padding:15px;background:var(--accent);color:rgba(0,0,0,.75);border:none;border-radius:var(--radius);font-family:'Quicksand',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;box-shadow:0 4px 0 var(--accent-dark);transition:all .12s;letter-spacing:.3px;outline:none}
-.continue-btn:hover{filter:brightness(1.06)}
-.continue-btn:active{transform:translateY(4px);box-shadow:none}
-.check-btn{width:100%;padding:15px;background:var(--btn);color:#fff;border:none;border-radius:var(--radius);font-family:'Quicksand',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;box-shadow:0 4px 0 var(--btn-dark);transition:all .12s;outline:none;margin-bottom:0}
-.check-btn:active{transform:translateY(4px);box-shadow:none}
+.chip.placed{background:var(--btn);color:#fff;border-color:var(--btn-d);box-shadow:0 2px 0 var(--btn-d)}
+.chip.ghost{opacity:.22;pointer-events:none}
+.mwrap{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.mcol{display:flex;flex-direction:column;gap:6px}
+.mbtn{background:#fff;border:2px solid #e5e5e5;border-radius:11px;padding:10px 12px;font-weight:700;font-family:'Quicksand',sans-serif;cursor:pointer;transition:all .12s;box-shadow:0 3px 0 #e5e5e5;text-align:center;font-size:.88rem;outline:none}
+.mbtn:hover{border-color:#bbb}
+.mbtn.sel{background:#e8f4fd;border-color:var(--btn);color:var(--bg)}
+.mbtn.hit{background:var(--gl);border-color:var(--green);color:var(--gd);pointer-events:none}
+.mbtn.miss{background:var(--rl);border-color:var(--red);animation:shake .3s}
+.fb{border-radius:13px;padding:13px 17px;margin-bottom:13px;display:flex;align-items:center;gap:9px;font-weight:800;font-size:.92rem}
+.fb.ok{background:var(--gl);color:var(--gd);border:2px solid var(--green)}
+.fb.ko{background:var(--rl);color:var(--red);border:2px solid var(--red)}
+.fbi{font-size:1.5rem}
+.fbh{font-weight:600;font-size:.8rem;margin-top:2px}
+.conbtn{width:100%;padding:14px;background:var(--acc);color:rgba(0,0,0,.75);border:none;border-radius:var(--r);font-family:'Quicksand',sans-serif;font-weight:900;font-size:.95rem;cursor:pointer;box-shadow:0 4px 0 var(--acc-d);transition:all .12s;outline:none}
+.conbtn:active{transform:translateY(4px);box-shadow:none}
+.chkbtn{width:100%;padding:14px;background:var(--btn);color:#fff;border:none;border-radius:var(--r);font-family:'Quicksand',sans-serif;font-weight:900;font-size:.95rem;cursor:pointer;box-shadow:0 4px 0 var(--btn-d);transition:all .12s;outline:none}
+.chkbtn:active{transform:translateY(4px);box-shadow:none}
 /* ── COMPLETE ── */
-.complete{text-align:center;padding:36px 20px}
-.complete .trophy{font-size:5rem;display:block;margin-bottom:14px;animation:bounce 1s ease-in-out infinite alternate}
-@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-14px)}}
-.complete-title{font-family:'Pacifico',sans-serif;font-size:2.2rem;color:var(--bg);margin-bottom:6px}
-.stats{display:flex;justify-content:center;gap:16px;margin:18px 0}
-.stat{background:#f7f7f7;border-radius:14px;padding:12px 18px;text-align:center}
-.stat-v{font-family:'Pacifico',sans-serif;font-size:1.8rem;color:var(--bg)}
-.stat-l{font-size:.7rem;color:var(--muted);font-weight:700;text-transform:uppercase;margin-top:2px}
-/* ── RESPONSIVE ── */
-@media(max-width:480px){
+.comp{text-align:center;padding:34px 18px}
+.troph{font-size:4.5rem;display:block;margin-bottom:12px;animation:bo 1s ease-in-out infinite alternate}
+@keyframes bo{from{transform:translateY(0)}to{transform:translateY(-13px)}}
+.ctit{font-family:'Pacifico',sans-serif;font-size:2rem;color:var(--bg);margin-bottom:5px}
+.stats{display:flex;justify-content:center;gap:14px;margin:16px 0;flex-wrap:wrap}
+.stat{background:#f7f7f7;border-radius:13px;padding:11px 16px;text-align:center}
+.sv{font-family:'Pacifico',sans-serif;font-size:1.7rem;color:var(--bg)}
+.sl{font-size:.68rem;color:var(--mut);font-weight:700;text-transform:uppercase;margin-top:2px}
+/* ── GAMES MENU ── */
+.games-menu{display:flex;flex-direction:column;gap:14px}
+.game-card{background:#fff;border-radius:18px;padding:20px;display:flex;align-items:center;gap:16px;cursor:pointer;border:3px solid transparent;transition:all .2s;box-shadow:0 6px 0 rgba(0,0,0,.25);outline:none;width:100%;text-align:left}
+.game-card:hover{transform:translateY(-3px);box-shadow:0 9px 0 rgba(0,0,0,.25);border-color:var(--acc)}
+.game-card .gc-icon{font-size:3rem;flex-shrink:0}
+.game-card .gc-info .gc-title{font-family:'Pacifico',sans-serif;font-size:1.2rem;color:var(--bg)}
+.game-card .gc-info .gc-sub{font-size:.82rem;color:var(--mut);margin-top:4px}
+/* ── WORD SEARCH ── */
+.ws-container{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
+.ws-grid-wrap{overflow-x:auto}
+.ws-grid{display:grid;border:2px solid #e0e0e0;border-radius:10px;overflow:hidden;background:#f8f8f8}
+.ws-cell{width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;cursor:pointer;border:1px solid #eee;transition:all .1s;background:#fff;color:#333;font-family:'Quicksand',sans-serif;user-select:none}
+.ws-cell:hover{background:#e8f4fd}
+.ws-cell.selecting{background:#AED6F1;color:var(--bg)}
+.ws-cell.found{background:var(--gl);color:var(--gd)}
+.ws-cell.found-alt{background:#FFE5B4;color:#C9782A}
+.ws-wordlist{min-width:160px}
+.ws-wordlist h3{font-family:'Pacifico',sans-serif;font-size:1rem;color:var(--bg);margin-bottom:10px}
+.ws-word{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 10px;border-radius:8px;margin-bottom:5px;font-size:.88rem;font-weight:700;background:#f7f7f7;transition:all .2s}
+.ws-word .wcat{color:var(--bg);font-size:.95rem}
+.ws-word .wnative{color:var(--mut);font-size:.8rem}
+.ws-word.hit{background:var(--gl);color:var(--gd)}
+.ws-word.hit .wcat,.ws-word.hit .wnative{color:var(--gd)}
+.ws-found-count{text-align:center;font-family:'Pacifico',sans-serif;font-size:1.1rem;color:var(--bg);margin:12px 0}
+/* ── 7 DIFERÈNCIES ── */
+.diff-container{display:flex;flex-direction:column;gap:16px}
+.diff-images{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.diff-img-wrap{position:relative;flex:1;min-width:280px}
+.diff-img-wrap svg{display:block;cursor:crosshair}
+.diff-label{text-align:center;font-weight:800;font-size:.8rem;color:var(--bg);margin-bottom:6px;letter-spacing:1px;text-transform:uppercase}
+.diff-click-indicator{position:absolute;pointer-events:none;border-radius:50%;border:3px solid;animation:diffpop .6s ease forwards}
+@keyframes diffpop{0%{transform:scale(0);opacity:1}100%{transform:scale(1);opacity:0}}
+.diff-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.diff-item{background:#f7f7f7;border:2px solid #e0e0e0;border-radius:10px;padding:8px 14px;font-size:.85rem;font-weight:700;color:var(--mut);transition:all .2s;display:flex;align-items:center;gap:6px}
+.diff-item.found{background:var(--gl);border-color:var(--green);color:var(--gd)}
+.diff-count{text-align:center;font-family:'Pacifico',sans-serif;font-size:1.3rem;color:var(--bg);margin:8px 0}
+/* ── BACK BTN ── */
+.backbtn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);border:2px solid rgba(255,255,255,.3);border-radius:999px;padding:8px 16px;font-family:'Quicksand',sans-serif;font-weight:800;font-size:.82rem;cursor:pointer;transition:all .15s;margin-bottom:14px;outline:none}
+.backbtn:hover{background:rgba(255,255,255,.25)}
+@media(max-width:520px){
   .opts{grid-template-columns:1fr}
-  .card{padding:20px 16px}
-  .lesson-btn{padding:14px 16px}
+  .card{padding:18px 14px}
+  .diff-images{flex-direction:column}
+  .ws-cell{width:26px;height:26px;font-size:12px}
 }
-/* ── STREAK ANIMATION ── */
-@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
-.pop{animation:pop .3s ease}
 </style>
 </head>
 <body>
-<!-- TOP BAR -->
 <div class="topbar">
   <span class="flag">🌎</span>
-  <span class="lang-name">Español</span>
-  <div class="progress-wrap"><div class="progress-bar" id="prog" style="width:0%"></div></div>
-  <div class="hearts" id="hearts">❤️❤️❤️</div>
-  <div class="xp-badge" id="xpBadge">0 XP</div>
+  <span class="lname">Español</span>
+  <div class="pw"><div class="pb" id="pb" style="width:0%"></div></div>
+  <div class="hts" id="hts">❤️❤️❤️</div>
+  <div class="xpb" id="xpb">0 XP</div>
 </div>
-
 <div class="page" id="app"></div>
-
+ 
 <script>
 // ═══════════════════════════════════════
-// CONFIG + DATA
+// DATA
 // ═══════════════════════════════════════
-const CFG = {"uiLang": "es-419", "catLang": "ca-ES", "langCode": "es", "langName": "Español", "flag": "🌎", "rtl": false, "ui": {"appTitle": "Aprende Catalán 🔴🟡", "subLine": "¡Tú puedes aprender catalán!", "startLesson": "Empezar ▶", "continue": "Continuar →", "check": "Comprobar", "correct": "¡Muy bien!", "wrong": "No es correcto", "correctAnswer": "La respuesta correcta:", "lessonComplete": "¡Lección completada!", "xpEarned": "XP ganados", "accuracy": "Precisión", "backHome": "← Volver", "listenPlay": "🔊 Escuchar", "locked": "🔒", "translate": "Traduce al catalán", "listen": "Escucha y elige la respuesta", "fill": "Rellena el espacio en blanco", "order": "Ordena las palabras", "match": "Empareja las palabras", "lives": "Vidas"}};
-const LESSONS = [{"id": 0, "icon": "👋", "color": "#e74c3c", "title": "Hola i adéu", "titleNative": "Hola y adiós", "exercises": [{"type": "translate", "q": "¿Cómo se dice 'Buenos días' en catalán?", "options": ["Bon dia", "Bona nit", "Adéu", "Gràcies"], "correct": 0}, {"type": "listen", "word": "Bon dia", "meaning": "Buenos días", "options": ["Bon dia", "Bona nit", "Hola", "Adéu"], "correct": 0}, {"type": "fill", "sentence": "___ et dius?", "blank": "Com", "hint": "¿Cómo te llamas? → ___ et dius?", "options": ["Com", "Quin", "On", "Quan"]}, {"type": "order", "cat": "Em dic Anna.", "es": "Me llamo Anna.", "words": ["Anna.", "dic", "Em"]}, {"type": "match", "pairs": [["Hola", "Hola"], ["Adéu", "Adiós"], ["Bon dia", "Buenos días"], ["Bona nit", "Buenas noches"]]}]}, {"id": 1, "icon": "👨‍👩‍👧", "color": "#f39c12", "title": "La família", "titleNative": "La familia", "exercises": [{"type": "translate", "q": "¿Qué significa 'el germà'?", "options": ["el padre", "el hermano", "el primo", "el abuelo"], "correct": 1}, {"type": "listen", "word": "La mare", "meaning": "la madre", "options": ["La mare", "El pare", "La germana", "L'àvia"], "correct": 0}, {"type": "fill", "sentence": "La meva ___ es diu Maria.", "blank": "mare", "hint": "Mi mamá se llama María. → La meva ___ es diu Maria.", "options": ["germana", "mare", "tia", "àvia"]}, {"type": "order", "cat": "Tinc una germana gran.", "es": "Tengo una hermana mayor.", "words": ["gran.", "germana", "una", "Tinc"]}, {"type": "match", "pairs": [["el pare", "el padre"], ["la mare", "la madre"], ["el germà", "el hermano"], ["l'avi", "el abuelo"]]}]}, {"id": 2, "icon": "🏫", "color": "#27ae60", "title": "L'escola", "titleNative": "La escuela", "exercises": [{"type": "translate", "q": "¿Cómo se dice 'el cuaderno' en catalán?", "options": ["el llibre", "el quadern", "la taula", "la motxilla"], "correct": 1}, {"type": "listen", "word": "La mestra", "meaning": "la maestra", "options": ["La mestra", "L'alumne", "La classe", "El pati"], "correct": 0}, {"type": "fill", "sentence": "Avui tinc ___ de matemàtiques.", "blank": "classe", "hint": "Hoy tengo clase de matemáticas. → Avui tinc ___ de matemàtiques.", "options": ["classe", "deures", "examen", "nota"]}, {"type": "order", "cat": "M'agrada molt l'escola.", "es": "Me gusta mucho la escuela.", "words": ["l'escola.", "molt", "M'agrada"]}, {"type": "match", "pairs": [["el quadern", "el cuaderno"], ["la motxilla", "la mochila"], ["el pati", "el patio"], ["els deures", "los deberes"]]}]}, {"id": 3, "icon": "🍽️", "color": "#8e44ad", "title": "El menjar", "titleNative": "La comida", "exercises": [{"type": "translate", "q": "¿Qué significa 'el pa'?", "options": ["la leche", "el arroz", "el pan", "la carne"], "correct": 2}, {"type": "listen", "word": "Tinc gana.", "meaning": "Tengo hambre.", "options": ["Tinc gana.", "Tinc set.", "Menjo fruita.", "M'agrada el peix."], "correct": 0}, {"type": "fill", "sentence": "Cada dia ___ fruita.", "blank": "menjo", "hint": "Cada día como fruta. → Cada dia ___ fruita.", "options": ["menjo", "bec", "compro", "vull"]}, {"type": "order", "cat": "M'agrada molt la fruita.", "es": "Me gusta mucho la fruta.", "words": ["la", "molt", "M'agrada", "fruita."]}, {"type": "match", "pairs": [["el pa", "el pan"], ["la llet", "la leche"], ["la carn", "la carne"], ["la fruita", "la fruta"]]}]}];
-const UI = CFG.ui;
-
+const UI   = ({"appTitle": "Aprende Catalán 🔴🟡", "subLine": "¡Tú puedes aprender catalán!", "continue": "Continuar →", "check": "Comprobar", "correct": "¡Muy bien!", "wrong": "No es correcto", "ca": "La respuesta correcta:", "lc": "¡Lección completada!", "xp": "XP ganados", "acc2": "Precisión", "back": "← Volver", "listen": "Escucha y elige", "locked": "🔒", "lives": "Vidas", "translate": "Traduce al catalán", "fill": "Rellena el espacio", "order": "Ordena las palabras", "match": "Empareja las palabras", "exercises": "Ejercicios"});
+const GL   = ({"games": "Juegos", "wordsearch": "Sopa de letras", "differences": "7 Diferencias", "exercises": "Ejercicios", "findwords": "¡Encuentra las palabras escondidas!", "finddiffs": "¡Encuentra las 7 diferencias entre las dos imágenes!", "found": "encontradas", "solved": "¡Resuelto!", "clickdiff": "Haz clic en una diferencia", "diffcorrect": "¡Correcto! ✓", "difftry": "Sigue buscando...", "allfound": "¡Todas encontradas!", "wordlist": "Palabras a buscar", "back_lesson": "← Volver", "reset": "Reiniciar"});
+const LESS = ([{"id": 0, "icon": "👋", "title": "Hola i adéu", "titleNative": "Hola y adiós", "exercises": [{"type": "translate", "q": "¿Cómo se dice 'Buenos días' en catalán?", "options": ["Bon dia", "Bona nit", "Adéu", "Gràcies"], "correct": 0}, {"type": "listen", "word": "Bon dia", "meaning": "Buenos días", "options": ["Bon dia", "Bona nit", "Hola", "Adéu"], "correct": 0}, {"type": "fill", "sentence": "Fins ___!", "blank": "aviat", "hint": "¡Hasta pronto! → Fins ___!", "options": ["aviat", "dia", "nit", "bona"]}, {"type": "order", "cat": "Com et dius?", "native": "¿Cómo te llamas?", "words": ["dius?", "et", "Com"]}, {"type": "match", "pairs": [["Hola", "Hola"], ["Adéu", "Adiós"], ["Bon dia", "Buenos días"], ["Bona nit", "Buenas noches"]]}, {"type": "translate", "q": "¿Cómo se dice '¿Cómo estás?' en catalán?", "options": ["Com estàs?", "Quants anys tens?", "On vius?", "Gràcies"], "correct": 0}, {"type": "listen", "word": "Molt bé, gràcies!", "meaning": "¡Muy bien, gracias!", "options": ["Molt bé, gràcies!", "Més o menys.", "Malament.", "Adéu!"], "correct": 0}, {"type": "fill", "sentence": "Molt ___, gràcies!", "blank": "bé", "hint": "¡Muy bien, gracias! → Molt ___, gràcies!", "options": ["bé", "mal", "poc", "molt"]}, {"type": "order", "cat": "Fins aviat!", "native": "¡Hasta pronto!", "words": ["aviat!", "Fins"]}, {"type": "match", "pairs": [["Gràcies", "Gracias"], ["De res", "De nada"], ["Si us plau", "Por favor"], ["Perdona", "Perdón"]]}]}, {"id": 1, "icon": "👨‍👩‍👧", "title": "La família", "titleNative": "La familia", "exercises": [{"type": "translate", "q": "¿Qué significa 'la mare'?", "options": ["el padre", "la madre", "el hermano", "la hermana"], "correct": 1}, {"type": "listen", "word": "El pare", "meaning": "el padre", "options": ["El pare", "La mare", "El germà", "L'avi"], "correct": 0}, {"type": "fill", "sentence": "Tinc ___ germana.", "blank": "una", "hint": "Tengo una hermana. → Tinc ___ germana.", "options": ["un", "una", "dos", "tres"]}, {"type": "order", "cat": "La meva família és gran.", "native": "Mi familia es grande.", "words": ["gran.", "és", "família", "La", "meva"]}, {"type": "match", "pairs": [["el pare", "el padre"], ["la mare", "la madre"], ["el germà", "el hermano"], ["la germana", "la hermana"]]}, {"type": "translate", "q": "¿Qué significa 'l'avi'?", "options": ["el abuelo", "la abuela", "el tío", "la tía"], "correct": 0}, {"type": "listen", "word": "L'àvia", "meaning": "la abuela", "options": ["L'avi", "L'àvia", "El tiet", "La tieta"], "correct": 1}, {"type": "fill", "sentence": "El meu ___ es diu Joan.", "blank": "avi", "hint": "Mi abuelo se llama Joan. → El meu ___ es diu Joan.", "options": ["avi", "pare", "germà", "fill"]}, {"type": "order", "cat": "Tinc dos germans i una germana.", "native": "Tengo dos hermanos y una hermana.", "words": ["germana.", "una", "i", "germans", "dos", "Tinc"]}, {"type": "match", "pairs": [["l'avi", "el abuelo"], ["l'àvia", "la abuela"], ["el tiet", "el tío"], ["la tieta", "la tía"]]}]}, {"id": 2, "icon": "🏫", "title": "L'escola", "titleNative": "La escuela", "exercises": [{"type": "translate", "q": "¿Cómo se dice 'el cuaderno' en catalán?", "options": ["el llibre", "el quadern", "la taula", "la motxilla"], "correct": 1}, {"type": "listen", "word": "La mestra", "meaning": "la maestra", "options": ["La mestra", "L'alumne", "La classe", "El pati"], "correct": 0}, {"type": "fill", "sentence": "Avui tenim ___ de català.", "blank": "classe", "hint": "Hoy tenemos clase de catalán. → Avui tenim ___ de català.", "options": ["classe", "deures", "examen", "nota"]}, {"type": "order", "cat": "M'agrada molt l'escola.", "native": "Me gusta mucho la escuela.", "words": ["l'escola.", "molt", "M'agrada"]}, {"type": "match", "pairs": [["el quadern", "el cuaderno"], ["la motxilla", "la mochila"], ["el pati", "el patio"], ["la pissarra", "la pizarra"]]}, {"type": "translate", "q": "¿Cómo se dice 'el lápiz' en catalán?", "options": ["el llapis", "el bolígraf", "la goma", "la regla"], "correct": 0}, {"type": "listen", "word": "Els deures", "meaning": "los deberes", "options": ["Els deures", "La classe", "L'examen", "La nota"], "correct": 0}, {"type": "fill", "sentence": "Escric amb un ___.", "blank": "llapis", "hint": "Escribo con un lápiz. → Escric amb un ___.", "options": ["llapis", "bolígraf", "taula", "llibre"]}, {"type": "order", "cat": "El professor explica la lliçó.", "native": "La maestra explica la lección.", "words": ["lliçó.", "la", "explica", "professor", "El"]}, {"type": "match", "pairs": [["el llapis", "el lápiz"], ["el bolígraf", "el bolígrafo"], ["la goma", "la goma"], ["la regla", "la regla"]]}]}, {"id": 3, "icon": "🍽️", "title": "El menjar", "titleNative": "La comida", "exercises": [{"type": "translate", "q": "¿Qué significa 'el pa'?", "options": ["la leche", "el arroz", "el pan", "la carne"], "correct": 2}, {"type": "listen", "word": "Tinc gana.", "meaning": "Tengo hambre.", "options": ["Tinc gana.", "Tinc set.", "Menjo pa.", "Bec llet."], "correct": 0}, {"type": "fill", "sentence": "Cada dia ___ fruita.", "blank": "menjo", "hint": "Como fruta todos los días. → Cada dia ___ fruita.", "options": ["menjo", "bec", "compro", "vull"]}, {"type": "order", "cat": "M'agrada molt la fruita.", "native": "Me gusta mucho la fruta.", "words": ["la", "molt", "M'agrada", "fruita."]}, {"type": "match", "pairs": [["el pa", "el pan"], ["la llet", "la leche"], ["la fruita", "la fruta"], ["el peix", "el pescado"]]}, {"type": "translate", "q": "¿Cómo se dice 'Tengo sed' en catalán?", "options": ["Tinc set.", "Tinc gana.", "Tinc son.", "Tinc fred."], "correct": 0}, {"type": "listen", "word": "Menjo una poma.", "meaning": "Como una manzana.", "options": ["Menjo una poma.", "Bec un suc.", "Menjo pa.", "Tinc gana."], "correct": 0}, {"type": "fill", "sentence": "Bec ___ cada matí.", "blank": "llet", "hint": "Bebo leche cada mañana. → Bec ___ cada matí.", "options": ["llet", "suc", "aigua", "pa"]}, {"type": "order", "cat": "La taronja és molt bona.", "native": "La naranja está muy buena.", "words": ["bona.", "molt", "és", "taronja", "La"]}, {"type": "match", "pairs": [["la carn", "la carne"], ["el peix", "el pescado"], ["la poma", "la manzana"], ["la taronja", "la naranja"]]}]}, {"id": 4, "icon": "🎨", "title": "Els colors", "titleNative": "Los colores", "exercises": [{"type": "translate", "q": "¿Cómo se dice 'rojo' en catalán?", "options": ["vermell", "blau", "verd", "groc"], "correct": 0}, {"type": "listen", "word": "El cel és blau.", "meaning": "El cielo es azul.", "options": ["El cel és blau.", "L'herba és verda.", "La rosa és vermella.", "La llimona és groga."], "correct": 0}, {"type": "fill", "sentence": "La sang és ___.", "blank": "vermella", "hint": "La sangre es roja. → La sang és ___.", "options": ["vermella", "blava", "verda", "groga"]}, {"type": "order", "cat": "El cotxe és de color negre.", "native": "El coche es de color negro.", "words": ["negre.", "color", "de", "és", "cotxe", "El"]}, {"type": "match", "pairs": [["vermell", "rojo"], ["blau", "azul"], ["verd", "verde"], ["groc", "amarillo"]]}, {"type": "translate", "q": "¿Cómo se dice 'blanco' en catalán?", "options": ["blanc", "negre", "taronja", "rosa"], "correct": 0}, {"type": "listen", "word": "La neu és blanca.", "meaning": "La nieve es blanca.", "options": ["La neu és blanca.", "El cel és blau.", "La nit és negra.", "El sol és groc."], "correct": 0}, {"type": "fill", "sentence": "El cel de nit és ___.", "blank": "negre", "hint": "El cielo de noche es negro. → El cel de nit és ___.", "options": ["negre", "blanc", "blau", "verd"]}, {"type": "order", "cat": "M'agrada el color taronja.", "native": "Me gusta el color naranja.", "words": ["taronja.", "color", "el", "M'agrada"]}, {"type": "match", "pairs": [["blanc", "blanco"], ["negre", "negro"], ["taronja", "naranja"], ["rosa", "rosa"]]}]}, {"id": 5, "icon": "👕", "title": "La roba", "titleNative": "La ropa", "exercises": [{"type": "translate", "q": "¿Cómo se dice 'camisa' en catalán?", "options": ["la camisa", "els pantalons", "la jaqueta", "les sabates"], "correct": 0}, {"type": "listen", "word": "Els pantalons", "meaning": "los pantalones", "options": ["Els pantalons", "La camisa", "La jaqueta", "El vestit"], "correct": 0}, {"type": "fill", "sentence": "Porto una ___ vermella.", "blank": "camisa", "hint": "Llevo una camisa roja. → Porto una ___ vermella.", "options": ["camisa", "jaqueta", "faldilla", "gorra"]}, {"type": "order", "cat": "Avui porto uns pantalons blaus.", "native": "Hoy llevo unos pantalones azules.", "words": ["blaus.", "pantalons", "uns", "porto", "Avui"]}, {"type": "match", "pairs": [["la camisa", "la camisa"], ["els pantalons", "los pantalones"], ["la jaqueta", "la chaqueta"], ["les sabates", "los zapatos"]]}, {"type": "translate", "q": "¿Cómo se dice 'vestido' en catalán?", "options": ["el vestit", "la faldilla", "el jersei", "la gorra"], "correct": 0}, {"type": "listen", "word": "Les sabates", "meaning": "los zapatos", "options": ["Les sabates", "Els calcetins", "La corbata", "El cinturó"], "correct": 0}, {"type": "fill", "sentence": "Necessito un ___ per a l'hivern.", "blank": "jersei", "hint": "Necesito un jersey para el invierno. → Necessito un ___ per a l'hivern.", "options": ["jersei", "vestit", "bikini", "banyador"]}, {"type": "order", "cat": "La faldilla és de color rosa.", "native": "La falda es de color rosa.", "words": ["rosa.", "color", "de", "és", "faldilla", "La"]}, {"type": "match", "pairs": [["el vestit", "el vestido"], ["la faldilla", "la falda"], ["el jersei", "el jersey"], ["la gorra", "la gorra"]]}]}, {"id": 6, "icon": "📅", "title": "Els dies", "titleNative": "Los días de la semana", "exercises": [{"type": "translate", "q": "¿Cómo se dice 'lunes' en catalán?", "options": ["dilluns", "dimarts", "dimecres", "dijous"], "correct": 0}, {"type": "listen", "word": "Avui és dimecres.", "meaning": "Hoy es miércoles.", "options": ["Avui és dimecres.", "Avui és dijous.", "Avui és divendres.", "Avui és dissabte."], "correct": 0}, {"type": "fill", "sentence": "El cap de setmana és ___ i diumenge.", "blank": "dissabte", "hint": "El fin de semana es ___ y domingo.", "options": ["dissabte", "divendres", "dilluns", "dimarts"]}, {"type": "order", "cat": "Demà és divendres.", "native": "Mañana es viernes.", "words": ["divendres.", "és", "Demà"]}, {"type": "match", "pairs": [["dilluns", "el lunes"], ["dimarts", "el martes"], ["dimecres", "el miércoles"], ["dijous", "el jueves"]]}, {"type": "translate", "q": "¿Cómo se dice 'el fin de semana' en catalán?", "options": ["el cap de setmana", "la setmana", "el dia", "el mes"], "correct": 0}, {"type": "listen", "word": "Diumenge no hi ha escola.", "meaning": "El domingo no hay escuela.", "options": ["Diumenge no hi ha escola.", "Dilluns hi ha escola.", "Dimarts tinc classe.", "Dijous hi ha examen."], "correct": 0}, {"type": "fill", "sentence": "___ és el primer dia de la setmana.", "blank": "Dilluns", "hint": "___ es el primer día de la semana.", "options": ["Dilluns", "Dimarts", "Dimecres", "Dijous"]}, {"type": "order", "cat": "El divendres acaba l'escola.", "native": "El viernes termina la escuela.", "words": ["l'escola.", "acaba", "divendres", "El"]}, {"type": "match", "pairs": [["divendres", "el viernes"], ["dissabte", "el sábado"], ["diumenge", "el domingo"], ["demà", "mañana"]]}]}]);
+const GD   = ({"0": {"wordsearch": {"grid": [["Q", "B", "O", "N", "D", "I", "A", "B", "B", "Q", "P", "Y"], ["A", "E", "F", "W", "O", "L", "H", "C", "A", "X", "E", "G"], ["I", "P", "A", "E", "G", "D", "X", "F", "B", "U", "R", "Z"], ["M", "H", "S", "U", "G", "G", "U", "R", "H", "K", "D", "H"], ["Y", "A", "D", "E", "E", "T", "D", "Z", "W", "T", "O", "S"], ["I", "K", "H", "E", "I", "D", "V", "N", "I", "H", "N", "Z"], ["B", "K", "N", "J", "R", "C", "A", "N", "S", "O", "A", "F"], ["J", "N", "V", "D", "N", "E", "A", "B", "M", "L", "N", "P"], ["Z", "A", "V", "K", "M", "N", "S", "R", "E", "A", "E", "F"], ["L", "T", "P", "M", "O", "U", "Q", "C", "G", "K", "G", "P"], ["B", "O", "H", "B", "S", "I", "U", "S", "P", "L", "A", "U"], ["S", "H", "O", "F", "U", "Q", "U", "K", "F", "F", "B", "U"]], "placements": [{"word": "HOLA", "r": 5, "c": 9, "dr": 1, "dc": 0}, {"word": "ADEU", "r": 6, "c": 6, "dr": -1, "dc": -1}, {"word": "BONDIA", "r": 0, "c": 1, "dr": 0, "dc": 1}, {"word": "BONANIT", "r": 10, "c": 3, "dr": -1, "dc": 1}, {"word": "GRACIES", "r": 9, "c": 8, "dr": -1, "dc": -1}, {"word": "DERES", "r": 4, "c": 2, "dr": 1, "dc": 1}, {"word": "SIUSPLAU", "r": 10, "c": 4, "dr": 0, "dc": 1}, {"word": "PERDONA", "r": 0, "c": 10, "dr": 1, "dc": 0}], "words": [{"cat": "Hola", "native": "Hola", "key": "HOLA"}, {"cat": "Adéu", "native": "Adiós", "key": "ADEU"}, {"cat": "Bon dia", "native": "Buenos días", "key": "BONDIA"}, {"cat": "Bona nit", "native": "Buenas noches", "key": "BONANIT"}, {"cat": "Gràcies", "native": "Gracias", "key": "GRACIES"}, {"cat": "De res", "native": "De nada", "key": "DERES"}, {"cat": "Si us plau", "native": "Por favor", "key": "SIUSPLAU"}, {"cat": "Perdona", "native": "Perdón", "key": "PERDONA"}], "size": 12}, "differences": {"svgA": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <!-- Cel -->\n        <rect width=\"400\" height=\"300\" fill=\"#87CEEB\"/>\n        <rect y=\"220\" width=\"400\" height=\"80\" fill=\"#90EE90\"/>\n        <!-- Sol -->\n        <circle cx=\"50\" cy=\"50\" r=\"30\" fill=\"#FFD700\"/>\n        <line x1=\"50\" y1=\"10\" x2=\"50\" y2=\"0\" stroke=\"#FFD700\" stroke-width=\"3\"/>\n        <line x1=\"80\" y1=\"20\" x2=\"88\" y2=\"12\" stroke=\"#FFD700\" stroke-width=\"3\"/>\n        <line x1=\"90\" y1=\"50\" x2=\"100\" y2=\"50\" stroke=\"#FFD700\" stroke-width=\"3\"/>\n        <!-- Núvol -->\n        <ellipse cx=\"300\" cy=\"40\" rx=\"35\" ry=\"20\" fill=\"white\"/>\n        <ellipse cx=\"280\" cy=\"45\" rx=\"20\" ry=\"15\" fill=\"white\"/>\n        <ellipse cx=\"320\" cy=\"45\" rx=\"20\" ry=\"15\" fill=\"white\"/>\n        <!-- Arbre -->\n        <rect x=\"180\" y=\"160\" width=\"12\" height=\"60\" fill=\"#8B4513\"/>\n        <ellipse cx=\"186\" cy=\"140\" rx=\"35\" ry=\"40\" fill=\"#228B22\"/>\n        <!-- Flor -->\n        <circle cx=\"130\" cy=\"218\" r=\"8\" fill=\"#FF69B4\"/>\n        <circle cx=\"122\" cy=\"210\" r=\"6\" fill=\"#FF69B4\"/>\n        <circle cx=\"138\" cy=\"210\" r=\"6\" fill=\"#FF69B4\"/>\n        <circle cx=\"130\" cy=\"210\" r=\"5\" fill=\"#FFD700\"/>\n        <line x1=\"130\" y1=\"226\" x2=\"130\" y2=\"240\" stroke=\"#228B22\" stroke-width=\"2\"/>\n        <!-- Persona A (dreta) -->\n        <circle cx=\"280\" cy=\"155\" r=\"18\" fill=\"#FDBCB4\"/>\n        <rect x=\"265\" y=\"173\" width=\"30\" height=\"35\" rx=\"5\" fill=\"#FF6B6B\"/>\n        <rect x=\"265\" y=\"208\" width=\"13\" height=\"30\" rx=\"3\" fill=\"#4169E1\"/>\n        <rect x=\"282\" y=\"208\" width=\"13\" height=\"30\" rx=\"3\" fill=\"#4169E1\"/>\n        <line x1=\"255\" y1=\"180\" x2=\"240\" y2=\"200\" stroke=\"#FF6B6B\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n        <line x1=\"295\" y1=\"180\" x2=\"310\" y2=\"195\" stroke=\"#FF6B6B\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n        <!-- Persona B (esquerra) -->\n        <circle cx=\"100\" cy=\"155\" r=\"18\" fill=\"#FDBCB4\"/>\n        <rect x=\"85\" y=\"173\" width=\"30\" height=\"35\" rx=\"5\" fill=\"#9B59B6\"/>\n        <rect x=\"85\" y=\"208\" width=\"13\" height=\"30\" rx=\"3\" fill=\"#4169E1\"/>\n        <rect x=\"102\" y=\"208\" width=\"13\" height=\"30\" rx=\"3\" fill=\"#4169E1\"/>\n        <!-- Bocadillo \"Hola!\" -->\n        <ellipse cx=\"160\" cy=\"120\" rx=\"40\" ry=\"22\" fill=\"white\" stroke=\"#333\" stroke-width=\"2\"/>\n        <polygon points=\"140,140 130,155 155,142\" fill=\"white\" stroke=\"#333\" stroke-width=\"2\"/>\n        <text x=\"160\" y=\"126\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"#333\">Hola!</text>\n        <!-- Ocell -->\n        <circle cx=\"350\" cy=\"60\" r=\"5\" fill=\"#333\"/><ellipse cx=\"357\" cy=\"58\" rx=\"8\" ry=\"4\" fill=\"#333\"/>\n        </svg>", "svgB": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <!-- Cel -->\n        <rect width=\"400\" height=\"300\" fill=\"#87CEEB\"/>\n        <rect y=\"220\" width=\"400\" height=\"80\" fill=\"#90EE90\"/>\n        <!-- Sol -->\n        <circle cx=\"50\" cy=\"50\" r=\"30\" fill=\"#FFA500\"/>\n        <line x1=\"50\" y1=\"10\" x2=\"50\" y2=\"0\" stroke=\"#FFA500\" stroke-width=\"3\"/>\n        <line x1=\"80\" y1=\"20\" x2=\"88\" y2=\"12\" stroke=\"#FFA500\" stroke-width=\"3\"/>\n        <line x1=\"90\" y1=\"50\" x2=\"100\" y2=\"50\" stroke=\"#FFA500\" stroke-width=\"3\"/>\n        <!-- Núvol -->\n        <ellipse cx=\"320\" cy=\"40\" rx=\"35\" ry=\"20\" fill=\"white\"/>\n        <ellipse cx=\"300\" cy=\"45\" rx=\"20\" ry=\"15\" fill=\"white\"/>\n        <ellipse cx=\"340\" cy=\"45\" rx=\"20\" ry=\"15\" fill=\"white\"/>\n        <!-- Arbre -->\n        <rect x=\"180\" y=\"160\" width=\"12\" height=\"60\" fill=\"#8B4513\"/>\n        <ellipse cx=\"186\" cy=\"140\" rx=\"35\" ry=\"40\" fill=\"#32CD32\"/>\n        <!-- Flor -->\n        <circle cx=\"130\" cy=\"218\" r=\"8\" fill=\"#FFD700\"/>\n        <circle cx=\"122\" cy=\"210\" r=\"6\" fill=\"#FFD700\"/>\n        <circle cx=\"138\" cy=\"210\" r=\"6\" fill=\"#FFD700\"/>\n        <circle cx=\"130\" cy=\"210\" r=\"5\" fill=\"#FFD700\"/>\n        <line x1=\"130\" y1=\"226\" x2=\"130\" y2=\"240\" stroke=\"#228B22\" stroke-width=\"2\"/>\n        <!-- Persona A (dreta) -->\n        <circle cx=\"280\" cy=\"155\" r=\"18\" fill=\"#FDBCB4\"/>\n        <rect x=\"265\" y=\"173\" width=\"30\" height=\"35\" rx=\"5\" fill=\"#4ECDC4\"/>\n        <rect x=\"265\" y=\"208\" width=\"13\" height=\"30\" rx=\"3\" fill=\"#4169E1\"/>\n        <rect x=\"282\" y=\"208\" width=\"13\" height=\"30\" rx=\"3\" fill=\"#4169E1\"/>\n        <line x1=\"255\" y1=\"180\" x2=\"240\" y2=\"200\" stroke=\"#4ECDC4\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n        <line x1=\"295\" y1=\"180\" x2=\"310\" y2=\"195\" stroke=\"#4ECDC4\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n        <!-- Persona B (esquerra) -->\n        <circle cx=\"100\" cy=\"155\" r=\"18\" fill=\"#FDBCB4\"/>\n        <rect x=\"85\" y=\"173\" width=\"30\" height=\"35\" rx=\"5\" fill=\"#9B59B6\"/>\n        <rect x=\"85\" y=\"208\" width=\"13\" height=\"30\" rx=\"3\" fill=\"#8B4513\"/>\n        <rect x=\"102\" y=\"208\" width=\"13\" height=\"30\" rx=\"3\" fill=\"#8B4513\"/>\n        <!-- Bocadillo \"Hola!\" -->\n        <ellipse cx=\"160\" cy=\"120\" rx=\"40\" ry=\"22\" fill=\"white\" stroke=\"#333\" stroke-width=\"2\"/>\n        <polygon points=\"140,140 130,155 155,142\" fill=\"white\" stroke=\"#333\" stroke-width=\"2\"/>\n        <text x=\"160\" y=\"126\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"#333\">Hola!</text>\n        <!-- Ocell -->\n        \n        </svg>", "diffs": [{"x": 35, "y": 35, "r": 35, "desc": "El color del sol"}, {"x": 305, "y": 30, "r": 40, "desc": "La posició del núvol"}, {"x": 280, "y": 165, "r": 30, "desc": "El color de la camisa"}, {"x": 95, "y": 215, "r": 30, "desc": "El color dels pantalons"}, {"x": 186, "y": 140, "r": 40, "desc": "El color de l'arbre"}, {"x": 350, "y": 60, "r": 20, "desc": "L'ocell"}, {"x": 130, "y": 215, "r": 20, "desc": "El color de la flor"}], "total": 7}}, "1": {"wordsearch": {"grid": [["T", "E", "I", "T", "W", "W", "Q", "G", "X", "O", "P", "Z"], ["G", "J", "D", "U", "N", "V", "G", "D", "Y", "V", "P", "D"], ["T", "O", "S", "O", "I", "A", "R", "I", "U", "C", "Y", "D"], ["W", "H", "G", "W", "R", "N", "T", "G", "V", "N", "W", "U"], ["K", "W", "U", "E", "R", "L", "L", "E", "S", "A", "I", "H"], ["U", "O", "F", "L", "R", "I", "Q", "R", "I", "V", "R", "S"], ["M", "R", "E", "E", "A", "M", "U", "M", "P", "T", "R", "A"], ["A", "K", "Z", "R", "Q", "I", "A", "A", "N", "T", "G", "A"], ["R", "L", "A", "A", "R", "D", "V", "N", "M", "E", "P", "B"], ["E", "P", "P", "P", "Y", "M", "S", "A", "A", "N", "A", "L"], ["B", "K", "W", "Q", "J", "B", "S", "I", "V", "A", "B", "K"], ["S", "L", "D", "R", "P", "J", "Y", "D", "C", "G", "J", "Z"]], "placements": [{"word": "PARE", "r": 9, "c": 3, "dr": -1, "dc": 0}, {"word": "MARE", "r": 6, "c": 0, "dr": 1, "dc": 0}, {"word": "GERMA", "r": 3, "c": 7, "dr": 1, "dc": 0}, {"word": "GERMANA", "r": 3, "c": 2, "dr": 1, "dc": 1}, {"word": "AVI", "r": 4, "c": 9, "dr": -1, "dc": -1}, {"word": "AVIA", "r": 9, "c": 7, "dr": -1, "dc": -1}, {"word": "TIET", "r": 0, "c": 3, "dr": 0, "dc": -1}, {"word": "TIETA", "r": 6, "c": 9, "dr": -1, "dc": -1}], "words": [{"cat": "Pare", "native": "Padre", "key": "PARE"}, {"cat": "Mare", "native": "Madre", "key": "MARE"}, {"cat": "Germà", "native": "Hermano", "key": "GERMA"}, {"cat": "Germana", "native": "Hermana", "key": "GERMANA"}, {"cat": "Avi", "native": "Abuelo", "key": "AVI"}, {"cat": "Àvia", "native": "Abuela", "key": "AVIA"}, {"cat": "Tiet", "native": "Tío", "key": "TIET"}, {"cat": "Tieta", "native": "Tía", "key": "TIETA"}], "size": 12}, "differences": {"svgA": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#FFF8E7\"/>\n        <rect y=\"230\" width=\"400\" height=\"70\" fill=\"#90EE90\"/>\n        <!-- Casa -->\n        <rect x=\"80\" y=\"120\" width=\"220\" height=\"120\" fill=\"#E8D5B7\" stroke=\"#999\" stroke-width=\"1\"/>\n        <!-- Teulada -->\n        <polygon points=\"60,120 200,40 340,120\" fill=\"#C0392B\"/>\n        <!-- Xemeneia -->\n        <rect x=\"280\" y=\"60\" width=\"20\" height=\"50\" fill=\"#999\"/>\n        <circle cx=\"310\" cy=\"60\" r=\"8\" fill=\"rgba(150,150,150,0.5)\"/><circle cx=\"320\" cy=\"48\" r=\"6\" fill=\"rgba(150,150,150,0.4)\"/>\n        <!-- Porta -->\n        <rect x=\"170\" y=\"195\" width=\"40\" height=\"45\" rx=\"3\" fill=\"#8B4513\"/>\n        <circle cx=\"205\" cy=\"219\" r=\"3\" fill=\"#FFD700\"/>\n        <!-- Finestres -->\n        <rect x=\"100\" y=\"145\" width=\"50\" height=\"45\" rx=\"3\" fill=\"#AED6F1\" stroke=\"#999\" stroke-width=\"1\"/>\n        <line x1=\"125\" y1=\"145\" x2=\"125\" y2=\"190\" stroke=\"#999\" stroke-width=\"1\"/>\n        <line x1=\"100\" y1=\"167\" x2=\"150\" y2=\"167\" stroke=\"#999\" stroke-width=\"1\"/>\n        <!-- Cortines -->\n        <rect x=\"100\" y=\"145\" width=\"12\" height=\"45\" rx=\"2\" fill=\"#FF9999\" opacity=\"0.7\"/>\n        <rect x=\"138\" y=\"145\" width=\"12\" height=\"45\" rx=\"2\" fill=\"#FF9999\" opacity=\"0.7\"/>\n        <!-- Finestra dreta -->\n        <rect x=\"240\" y=\"145\" width=\"50\" height=\"45\" rx=\"3\" fill=\"#AED6F1\" stroke=\"#999\" stroke-width=\"1\"/>\n        <line x1=\"265\" y1=\"145\" x2=\"265\" y2=\"190\" stroke=\"#999\" stroke-width=\"1\"/>\n        <line x1=\"240\" y1=\"167\" x2=\"290\" y2=\"167\" stroke=\"#999\" stroke-width=\"1\"/>\n        <!-- Gat -->\n        <ellipse cx=\"340\" cy=\"228\" rx=\"18\" ry=\"10\" fill=\"#888\"/>\n        <circle cx=\"340\" cy=\"218\" r=\"10\" fill=\"#888\"/>\n        <polygon points=\"333,211 330,200 338,208\" fill=\"#888\"/>\n        <polygon points=\"347,211 350,200 342,208\" fill=\"#888\"/>\n        <circle cx=\"336\" cy=\"218\" r=\"2\" fill=\"#2C3E50\"/>\n        <circle cx=\"344\" cy=\"218\" r=\"2\" fill=\"#2C3E50\"/>\n        <!-- Flors -->\n        <circle cx=\"50\" cy=\"228\" r=\"7\" fill=\"#E74C3C\"/>\n        <circle cx=\"65\" cy=\"222\" r=\"7\" fill=\"#E74C3C\"/>\n        <circle cx=\"57\" cy=\"215\" r=\"7\" fill=\"#E74C3C\"/>\n        <circle cx=\"57\" cy=\"221\" r=\"4\" fill=\"#FFD700\"/>\n        <!-- Persones davant -->\n        <!-- Pare -->\n        <circle cx=\"155\" cy=\"195\" r=\"12\" fill=\"#FDBCB4\"/>\n        <rect x=\"147\" y=\"207\" width=\"18\" height=\"22\" rx=\"3\" fill=\"#2C3E50\"/>\n        <!-- Mare -->\n        <circle cx=\"200\" cy=\"190\" r=\"12\" fill=\"#FDBCB4\"/>\n        <rect x=\"192\" y=\"202\" width=\"18\" height=\"25\" rx=\"3\" fill=\"#E74C3C\"/>\n        <!-- Nen -->\n        <circle cx=\"245\" cy=\"200\" r=\"10\" fill=\"#FDBCB4\"/>\n        <rect x=\"238\" y=\"210\" width=\"14\" height=\"18\" rx=\"3\" fill=\"#3498DB\"/>\n        </svg>", "svgB": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#FFF8E7\"/>\n        <rect y=\"230\" width=\"400\" height=\"70\" fill=\"#90EE90\"/>\n        <!-- Casa -->\n        <rect x=\"80\" y=\"120\" width=\"220\" height=\"120\" fill=\"#D4A5A5\" stroke=\"#999\" stroke-width=\"1\"/>\n        <!-- Teulada -->\n        <polygon points=\"60,120 200,40 340,120\" fill=\"#8E44AD\"/>\n        <!-- Xemeneia -->\n        <rect x=\"280\" y=\"60\" width=\"20\" height=\"50\" fill=\"#999\"/>\n        \n        <!-- Porta -->\n        <rect x=\"170\" y=\"195\" width=\"40\" height=\"45\" rx=\"3\" fill=\"#2ECC71\"/>\n        <circle cx=\"205\" cy=\"219\" r=\"3\" fill=\"#FFD700\"/>\n        <!-- Finestres -->\n        <rect x=\"100\" y=\"145\" width=\"50\" height=\"45\" rx=\"3\" fill=\"#AED6F1\" stroke=\"#999\" stroke-width=\"1\"/>\n        <line x1=\"125\" y1=\"145\" x2=\"125\" y2=\"190\" stroke=\"#999\" stroke-width=\"1\"/>\n        <line x1=\"100\" y1=\"167\" x2=\"150\" y2=\"167\" stroke=\"#999\" stroke-width=\"1\"/>\n        <!-- Cortines -->\n        <rect x=\"100\" y=\"145\" width=\"12\" height=\"45\" rx=\"2\" fill=\"#99CCFF\" opacity=\"0.7\"/>\n        <rect x=\"138\" y=\"145\" width=\"12\" height=\"45\" rx=\"2\" fill=\"#99CCFF\" opacity=\"0.7\"/>\n        <!-- Finestra dreta -->\n        <rect x=\"240\" y=\"145\" width=\"50\" height=\"45\" rx=\"3\" fill=\"#AED6F1\" stroke=\"#999\" stroke-width=\"1\"/>\n        <line x1=\"265\" y1=\"145\" x2=\"265\" y2=\"190\" stroke=\"#999\" stroke-width=\"1\"/>\n        <line x1=\"240\" y1=\"167\" x2=\"290\" y2=\"167\" stroke=\"#999\" stroke-width=\"1\"/>\n        <!-- Gat -->\n        <ellipse cx=\"340\" cy=\"228\" rx=\"18\" ry=\"10\" fill=\"#F39C12\"/>\n        <circle cx=\"340\" cy=\"218\" r=\"10\" fill=\"#F39C12\"/>\n        <polygon points=\"333,211 330,200 338,208\" fill=\"#F39C12\"/>\n        <polygon points=\"347,211 350,200 342,208\" fill=\"#F39C12\"/>\n        <circle cx=\"336\" cy=\"218\" r=\"2\" fill=\"#2C3E50\"/>\n        <circle cx=\"344\" cy=\"218\" r=\"2\" fill=\"#2C3E50\"/>\n        <!-- Flors -->\n        <circle cx=\"50\" cy=\"228\" r=\"7\" fill=\"#3498DB\"/>\n        <circle cx=\"65\" cy=\"222\" r=\"7\" fill=\"#3498DB\"/>\n        <circle cx=\"57\" cy=\"215\" r=\"7\" fill=\"#3498DB\"/>\n        <circle cx=\"57\" cy=\"221\" r=\"4\" fill=\"#FFD700\"/>\n        <!-- Persones davant -->\n        <!-- Pare -->\n        <circle cx=\"155\" cy=\"195\" r=\"12\" fill=\"#FDBCB4\"/>\n        <rect x=\"147\" y=\"207\" width=\"18\" height=\"22\" rx=\"3\" fill=\"#2C3E50\"/>\n        <!-- Mare -->\n        <circle cx=\"200\" cy=\"190\" r=\"12\" fill=\"#FDBCB4\"/>\n        <rect x=\"192\" y=\"202\" width=\"18\" height=\"25\" rx=\"3\" fill=\"#E74C3C\"/>\n        <!-- Nen -->\n        <circle cx=\"245\" cy=\"200\" r=\"10\" fill=\"#FDBCB4\"/>\n        <rect x=\"238\" y=\"210\" width=\"14\" height=\"18\" rx=\"3\" fill=\"#3498DB\"/>\n        </svg>", "diffs": [{"x": 190, "y": 160, "r": 50, "desc": "El color de les parets"}, {"x": 200, "y": 70, "r": 50, "desc": "El color de la teulada"}, {"x": 190, "y": 215, "r": 30, "desc": "El color de la porta"}, {"x": 125, "y": 167, "r": 35, "desc": "El color de les cortines"}, {"x": 340, "y": 218, "r": 25, "desc": "El color del gat"}, {"x": 57, "y": 220, "r": 25, "desc": "El color de les flors"}, {"x": 305, "y": 55, "r": 25, "desc": "El fum de la xemeneia"}], "total": 7}}, "2": {"wordsearch": {"grid": [["V", "B", "P", "J", "X", "A", "N", "A", "X", "F", "S", "F"], ["R", "K", "S", "I", "W", "J", "L", "H", "E", "S", "H", "V"], ["S", "M", "K", "I", "F", "U", "B", "V", "K", "D", "G", "P"], ["C", "E", "Q", "N", "A", "N", "L", "R", "E", "C", "Q", "I"], ["P", "S", "F", "T", "R", "T", "S", "K", "O", "O", "L", "S"], ["A", "T", "I", "S", "G", "C", "V", "I", "K", "L", "N", "S"], ["R", "R", "W", "I", "I", "A", "M", "C", "I", "R", "D", "A"], ["I", "A", "I", "P", "L", "J", "T", "B", "E", "N", "A", "R"], ["D", "D", "N", "A", "O", "O", "R", "D", "K", "A", "Z", "R"], ["A", "M", "T", "L", "B", "E", "A", "N", "S", "B", "V", "A"], ["C", "R", "F", "L", "O", "U", "I", "V", "I", "O", "G", "W"], ["K", "F", "E", "W", "Q", "G", "C", "K", "T", "C", "S", "U"]], "placements": [{"word": "LLIBRE", "r": 4, "c": 10, "dr": 1, "dc": -1}, {"word": "QUADERN", "r": 11, "c": 4, "dr": -1, "dc": 1}, {"word": "LLAPIS", "r": 10, "c": 3, "dr": -1, "dc": 0}, {"word": "BOLIGRAF", "r": 9, "c": 4, "dr": -1, "dc": 0}, {"word": "TAULA", "r": 4, "c": 3, "dr": -1, "dc": 1}, {"word": "CADIRA", "r": 10, "c": 0, "dr": -1, "dc": 0}, {"word": "PISSARRA", "r": 2, "c": 11, "dr": 1, "dc": 0}, {"word": "MESTRA", "r": 2, "c": 1, "dr": 1, "dc": 0}], "words": [{"cat": "Llibre", "native": "Libro", "key": "LLIBRE"}, {"cat": "Quadern", "native": "Cuaderno", "key": "QUADERN"}, {"cat": "Llapis", "native": "Lápiz", "key": "LLAPIS"}, {"cat": "Bolígraf", "native": "Bolígrafo", "key": "BOLIGRAF"}, {"cat": "Taula", "native": "Mesa", "key": "TAULA"}, {"cat": "Cadira", "native": "Silla", "key": "CADIRA"}, {"cat": "Pissarra", "native": "Pizarra", "key": "PISSARRA"}, {"cat": "Mestra", "native": "Maestra", "key": "MESTRA"}], "size": 12}, "differences": {"svgA": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#F5F5F0\"/>\n        <!-- Paret -->\n        <rect width=\"400\" height=\"300\" fill=\"#FAFAFA\"/>\n        <!-- Pissarra -->\n        <rect x=\"50\" y=\"30\" width=\"200\" height=\"130\" rx=\"5\" fill=\"#2C3E50\" stroke=\"#555\" stroke-width=\"3\"/>\n        <text x=\"150\" y=\"100\" text-anchor=\"middle\" font-size=\"22\" font-weight=\"bold\" fill=\"white\">Hola!</text>\n        <rect x=\"50\" y=\"155\" width=\"200\" height=\"8\" rx=\"2\" fill=\"#D4C5A9\"/>\n        <!-- Guixos -->\n        <rect x=\"60\" y=\"158\" width=\"15\" height=\"5\" rx=\"2\" fill=\"white\"/>\n        <rect x=\"80\" y=\"158\" width=\"15\" height=\"5\" rx=\"2\" fill=\"#FFEB3B\"/>\n        <!-- Finestra -->\n        <rect x=\"300\" y=\"30\" width=\"85\" height=\"100\" rx=\"4\" fill=\"#87CEEB\" stroke=\"#999\" stroke-width=\"2\"/>\n        <line x1=\"342\" y1=\"30\" x2=\"342\" y2=\"130\" stroke=\"#999\" stroke-width=\"1\"/>\n        <line x1=\"300\" y1=\"80\" x2=\"385\" y2=\"80\" stroke=\"#999\" stroke-width=\"1\"/>\n        <!-- Test/Planta -->\n        <rect x=\"315\" y=\"140\" width=\"30\" height=\"25\" rx=\"3\" fill=\"#E67E22\"/>\n        <ellipse cx=\"330\" cy=\"128\" rx=\"20\" ry=\"15\" fill=\"#27AE60\"/>\n        <circle cx=\"322\" cy=\"122\" r=\"6\" fill=\"#FF69B4\"/>\n        <circle cx=\"338\" cy=\"118\" r=\"6\" fill=\"#FF69B4\"/>\n        <!-- Terra -->\n        <rect y=\"240\" width=\"400\" height=\"60\" fill=\"#DEB887\"/>\n        <!-- Taula mestra -->\n        <rect x=\"30\" y=\"190\" width=\"160\" height=\"20\" rx=\"3\" fill=\"#8B4513\"/>\n        <rect x=\"50\" y=\"210\" width=\"15\" height=\"40\" rx=\"2\" fill=\"#8B4513\"/>\n        <rect x=\"155\" y=\"210\" width=\"15\" height=\"40\" rx=\"2\" fill=\"#8B4513\"/>\n        <!-- Llibres sobre taula -->\n        <rect x=\"60\" y=\"178\" width=\"25\" height=\"14\" rx=\"2\" fill=\"#E74C3C\"/>\n        <rect x=\"88\" y=\"176\" width=\"25\" height=\"16\" rx=\"2\" fill=\"#27AE60\"/>\n        <rect x=\"116\" y=\"179\" width=\"25\" height=\"13\" rx=\"2\" fill=\"#F39C12\"/>\n        <!-- Mestra -->\n        <circle cx=\"160\" cy=\"160\" r=\"16\" fill=\"#FDBCB4\"/>\n        <rect x=\"148\" y=\"176\" width=\"24\" height=\"28\" rx=\"4\" fill=\"#8E44AD\"/>\n        <!-- Pupitre alumne -->\n        <rect x=\"230\" y=\"195\" width=\"80\" height=\"15\" rx=\"3\" fill=\"#A0522D\"/>\n        <rect x=\"240\" y=\"210\" width=\"12\" height=\"35\" rx=\"2\" fill=\"#A0522D\"/>\n        <rect x=\"288\" y=\"210\" width=\"12\" height=\"35\" rx=\"2\" fill=\"#A0522D\"/>\n        <!-- Alumne -->\n        <circle cx=\"270\" cy=\"168\" r=\"14\" fill=\"#FDBCB4\"/>\n        <rect x=\"259\" y=\"182\" width=\"22\" height=\"26\" rx=\"4\" fill=\"#2ECC71\"/>\n        </svg>", "svgB": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#F5F5F0\"/>\n        <!-- Paret -->\n        <rect width=\"400\" height=\"300\" fill=\"#FAFAFA\"/>\n        <!-- Pissarra -->\n        <rect x=\"50\" y=\"30\" width=\"200\" height=\"130\" rx=\"5\" fill=\"#1A6B3C\" stroke=\"#555\" stroke-width=\"3\"/>\n        <text x=\"150\" y=\"100\" text-anchor=\"middle\" font-size=\"22\" font-weight=\"bold\" fill=\"white\">Adéu!</text>\n        <rect x=\"50\" y=\"155\" width=\"200\" height=\"8\" rx=\"2\" fill=\"#D4C5A9\"/>\n        <!-- Guixos -->\n        <rect x=\"60\" y=\"158\" width=\"15\" height=\"5\" rx=\"2\" fill=\"white\"/>\n        <rect x=\"80\" y=\"158\" width=\"15\" height=\"5\" rx=\"2\" fill=\"#FFEB3B\"/>\n        <!-- Finestra -->\n        <rect x=\"300\" y=\"30\" width=\"85\" height=\"100\" rx=\"4\" fill=\"#FFB347\" stroke=\"#999\" stroke-width=\"2\"/>\n        <line x1=\"342\" y1=\"30\" x2=\"342\" y2=\"130\" stroke=\"#999\" stroke-width=\"1\"/>\n        <line x1=\"300\" y1=\"80\" x2=\"385\" y2=\"80\" stroke=\"#999\" stroke-width=\"1\"/>\n        <!-- Test/Planta -->\n        <rect x=\"315\" y=\"140\" width=\"30\" height=\"25\" rx=\"3\" fill=\"#E67E22\"/>\n        <ellipse cx=\"330\" cy=\"128\" rx=\"20\" ry=\"15\" fill=\"#27AE60\"/>\n        <circle cx=\"322\" cy=\"122\" r=\"6\" fill=\"#FFD700\"/>\n        <circle cx=\"338\" cy=\"118\" r=\"6\" fill=\"#FFD700\"/>\n        <!-- Terra -->\n        <rect y=\"240\" width=\"400\" height=\"60\" fill=\"#DEB887\"/>\n        <!-- Taula mestra -->\n        <rect x=\"30\" y=\"190\" width=\"160\" height=\"20\" rx=\"3\" fill=\"#D35400\"/>\n        <rect x=\"50\" y=\"210\" width=\"15\" height=\"40\" rx=\"2\" fill=\"#D35400\"/>\n        <rect x=\"155\" y=\"210\" width=\"15\" height=\"40\" rx=\"2\" fill=\"#D35400\"/>\n        <!-- Llibres sobre taula -->\n        <rect x=\"60\" y=\"178\" width=\"25\" height=\"14\" rx=\"2\" fill=\"#3498DB\"/>\n        <rect x=\"88\" y=\"176\" width=\"25\" height=\"16\" rx=\"2\" fill=\"#27AE60\"/>\n        <rect x=\"116\" y=\"179\" width=\"25\" height=\"13\" rx=\"2\" fill=\"#F39C12\"/>\n        <!-- Mestra -->\n        <circle cx=\"160\" cy=\"160\" r=\"16\" fill=\"#FDBCB4\"/>\n        <rect x=\"148\" y=\"176\" width=\"24\" height=\"28\" rx=\"4\" fill=\"#8E44AD\"/>\n        <!-- Pupitre alumne -->\n        <rect x=\"230\" y=\"195\" width=\"80\" height=\"15\" rx=\"3\" fill=\"#A0522D\"/>\n        <rect x=\"240\" y=\"210\" width=\"12\" height=\"35\" rx=\"2\" fill=\"#A0522D\"/>\n        <rect x=\"288\" y=\"210\" width=\"12\" height=\"35\" rx=\"2\" fill=\"#A0522D\"/>\n        <!-- Alumne -->\n        <circle cx=\"270\" cy=\"168\" r=\"14\" fill=\"#FDBCB4\"/>\n        <rect x=\"259\" y=\"182\" width=\"22\" height=\"26\" rx=\"4\" fill=\"#E74C3C\"/>\n        </svg>", "diffs": [{"x": 150, "y": 90, "r": 50, "desc": "El color de la pissarra"}, {"x": 150, "y": 100, "r": 40, "desc": "El text de la pissarra"}, {"x": 90, "y": 198, "r": 40, "desc": "El color de la taula"}, {"x": 75, "y": 183, "r": 20, "desc": "El color del llibre"}, {"x": 342, "y": 80, "r": 42, "desc": "El cel de la finestra"}, {"x": 270, "y": 182, "r": 22, "desc": "El color de la samarreta"}, {"x": 330, "y": 128, "r": 25, "desc": "El color de les flors"}], "total": 7}}, "3": {"wordsearch": {"grid": [["F", "N", "I", "T", "G", "R", "Y", "C", "J", "P", "V", "N"], ["P", "R", "U", "A", "E", "M", "Y", "S", "I", "U", "X", "X"], ["A", "A", "W", "M", "T", "L", "F", "R", "U", "I", "T", "A"], ["O", "C", "G", "O", "U", "V", "L", "K", "Z", "A", "K", "B"], ["T", "G", "L", "P", "C", "H", "M", "Q", "P", "Z", "X", "M"], ["O", "C", "A", "L", "A", "B", "O", "F", "L", "B", "G", "T"], ["J", "A", "R", "P", "H", "W", "F", "H", "L", "A", "A", "I"], ["K", "U", "A", "E", "P", "L", "C", "C", "P", "R", "A", "K"], ["X", "X", "R", "I", "L", "T", "B", "F", "O", "R", "W", "F"], ["E", "Y", "C", "X", "P", "M", "R", "N", "Z", "O", "K", "C"], ["U", "J", "I", "F", "R", "W", "J", "G", "K", "S", "J", "X"], ["H", "P", "X", "N", "H", "A", "I", "U", "B", "S", "A", "X"]], "placements": [{"word": "PA", "r": 4, "c": 8, "dr": -1, "dc": 1}, {"word": "LLET", "r": 3, "c": 6, "dr": -1, "dc": -1}, {"word": "CARN", "r": 3, "c": 1, "dr": -1, "dc": 0}, {"word": "PEIX", "r": 6, "c": 3, "dr": 1, "dc": 0}, {"word": "FRUITA", "r": 2, "c": 6, "dr": 0, "dc": 1}, {"word": "TARONJA", "r": 5, "c": 11, "dr": 1, "dc": -1}, {"word": "POMA", "r": 4, "c": 3, "dr": -1, "dc": 0}, {"word": "ARROS", "r": 6, "c": 9, "dr": 1, "dc": 0}], "words": [{"cat": "Pa", "native": "Pan", "key": "PA"}, {"cat": "Llet", "native": "Leche", "key": "LLET"}, {"cat": "Carn", "native": "Carne", "key": "CARN"}, {"cat": "Peix", "native": "Pescado", "key": "PEIX"}, {"cat": "Fruita", "native": "Fruta", "key": "FRUITA"}, {"cat": "Taronja", "native": "Naranja", "key": "TARONJA"}, {"cat": "Poma", "native": "Manzana", "key": "POMA"}, {"cat": "Arròs", "native": "Arroz", "key": "ARROS"}], "size": 12}, "differences": {"svgA": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#FFF8F0\"/>\n        <!-- Terra/Paret -->\n        <rect y=\"230\" width=\"400\" height=\"70\" fill=\"#DEB887\" opacity=\"0.3\"/>\n        <!-- Taula -->\n        <ellipse cx=\"200\" cy=\"220\" rx=\"180\" ry=\"40\" fill=\"#FF6B6B\"/>\n        <ellipse cx=\"200\" cy=\"215\" rx=\"180\" ry=\"35\" fill=\"#FF6B6B\" opacity=\"0.8\"/>\n        <!-- Potes taula -->\n        <rect x=\"50\" y=\"220\" width=\"10\" height=\"60\" rx=\"3\" fill=\"#A0522D\"/>\n        <rect x=\"340\" y=\"220\" width=\"10\" height=\"60\" rx=\"3\" fill=\"#A0522D\"/>\n        <!-- Pa -->\n        <ellipse cx=\"100\" cy=\"200\" rx=\"35\" ry=\"18\" fill=\"#DEB887\"/>\n        <ellipse cx=\"100\" cy=\"196\" rx=\"32\" ry=\"14\" fill=\"#C8A870\"/>\n        <!-- Plat amb fruita -->\n        <ellipse cx=\"200\" cy=\"195\" rx=\"45\" ry=\"12\" fill=\"#F0F0F0\" stroke=\"#DDD\" stroke-width=\"1\"/>\n        <!-- Poma -->\n        <ellipse cx=\"185\" cy=\"182\" rx=\"16\" ry=\"18\" fill=\"#E74C3C\"/>\n        <rect x=\"190\" y=\"165\" width=\"3\" height=\"8\" fill=\"#228B22\"/>\n        <!-- Plàtan -->\n        <path d=\"M210,185 Q225,175 235,182 Q228,195 215,195 Z\" fill=\"#FFD700\"/>\n        <!-- Pastís -->\n        <ellipse cx=\"200\" cy=\"170\" rx=\"25\" ry=\"12\" fill=\"#F8C8A0\"/>\n        <rect x=\"175\" y=\"158\" width=\"50\" height=\"14\" rx=\"3\" fill=\"#F4A460\"/>\n        <rect x=\"193\" y=\"158\" width=\"4\" height=\"10\" fill=\"#FF6B6B\"/><rect x=\"202\" y=\"155\" width=\"4\" height=\"13\" fill=\"#4ECDC4\"/><circle cx=\"195\" cy=\"157\" r=\"2\" fill=\"#FFD700\"/><circle cx=\"204\" cy=\"154\" r=\"2\" fill=\"#FFD700\"/>\n        <!-- Got -->\n        <rect x=\"295\" y=\"175\" width=\"30\" height=\"40\" rx=\"3\" fill=\"rgba(200,200,255,0.3)\" stroke=\"#999\" stroke-width=\"1\"/>\n        <rect x=\"297\" y=\"195\" width=\"26\" height=\"18\" rx=\"2\" fill=\"#F39C12\" opacity=\"0.7\"/>\n        <!-- Gerro amb flors -->\n        <rect x=\"330\" y=\"180\" width=\"20\" height=\"30\" rx=\"4\" fill=\"#5DADE2\"/>\n        <circle cx=\"330\" cy=\"175\" r=\"8\" fill=\"#FF69B4\"/>\n        <circle cx=\"340\" cy=\"172\" r=\"8\" fill=\"#FF69B4\"/>\n        <circle cx=\"350\" cy=\"176\" r=\"8\" fill=\"#FF69B4\"/>\n        <!-- Gat -->\n        <ellipse cx=\"340\" cy=\"262\" rx=\"22\" ry=\"12\" fill=\"#888\"/><circle cx=\"340\" cy=\"250\" r=\"12\" fill=\"#888\"/><polygon points=\"333,242 330,230 339,241\" fill=\"#888\"/><polygon points=\"347,242 350,230 341,241\" fill=\"#888\"/>\n        </svg>", "svgB": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#FFF8F0\"/>\n        <!-- Terra/Paret -->\n        <rect y=\"230\" width=\"400\" height=\"70\" fill=\"#DEB887\" opacity=\"0.3\"/>\n        <!-- Taula -->\n        <ellipse cx=\"200\" cy=\"220\" rx=\"180\" ry=\"40\" fill=\"#4ECDC4\"/>\n        <ellipse cx=\"200\" cy=\"215\" rx=\"180\" ry=\"35\" fill=\"#4ECDC4\" opacity=\"0.8\"/>\n        <!-- Potes taula -->\n        <rect x=\"50\" y=\"220\" width=\"10\" height=\"60\" rx=\"3\" fill=\"#A0522D\"/>\n        <rect x=\"340\" y=\"220\" width=\"10\" height=\"60\" rx=\"3\" fill=\"#A0522D\"/>\n        <!-- Pa -->\n        <ellipse cx=\"100\" cy=\"200\" rx=\"35\" ry=\"18\" fill=\"#F4A460\"/>\n        <ellipse cx=\"100\" cy=\"196\" rx=\"32\" ry=\"14\" fill=\"#C8A870\"/>\n        <!-- Plat amb fruita -->\n        <ellipse cx=\"200\" cy=\"195\" rx=\"45\" ry=\"12\" fill=\"#F0F0F0\" stroke=\"#DDD\" stroke-width=\"1\"/>\n        <!-- Poma -->\n        <ellipse cx=\"185\" cy=\"182\" rx=\"16\" ry=\"18\" fill=\"#27AE60\"/>\n        <rect x=\"190\" y=\"165\" width=\"3\" height=\"8\" fill=\"#228B22\"/>\n        <!-- Plàtan -->\n        <path d=\"M210,185 Q225,175 235,182 Q228,195 215,195 Z\" fill=\"#FFD700\"/>\n        <!-- Pastís -->\n        <ellipse cx=\"200\" cy=\"170\" rx=\"25\" ry=\"12\" fill=\"#F8C8A0\"/>\n        <rect x=\"175\" y=\"158\" width=\"50\" height=\"14\" rx=\"3\" fill=\"#F4A460\"/>\n        <rect x=\"193\" y=\"158\" width=\"4\" height=\"10\" fill=\"#FF6B6B\"/><circle cx=\"195\" cy=\"157\" r=\"2\" fill=\"#FFD700\"/>\n        <!-- Got -->\n        <rect x=\"295\" y=\"175\" width=\"30\" height=\"40\" rx=\"3\" fill=\"rgba(200,200,255,0.3)\" stroke=\"#999\" stroke-width=\"1\"/>\n        <rect x=\"297\" y=\"195\" width=\"26\" height=\"18\" rx=\"2\" fill=\"#E74C3C\" opacity=\"0.7\"/>\n        <!-- Gerro amb flors -->\n        <rect x=\"330\" y=\"180\" width=\"20\" height=\"30\" rx=\"4\" fill=\"#5DADE2\"/>\n        <circle cx=\"330\" cy=\"175\" r=\"8\" fill=\"#9B59B6\"/>\n        <circle cx=\"340\" cy=\"172\" r=\"8\" fill=\"#9B59B6\"/>\n        <circle cx=\"350\" cy=\"176\" r=\"8\" fill=\"#9B59B6\"/>\n        <!-- Gat -->\n        \n        </svg>", "diffs": [{"x": 200, "y": 215, "r": 50, "desc": "El color de les estovalles"}, {"x": 100, "y": 200, "r": 35, "desc": "El color del pa"}, {"x": 185, "y": 182, "r": 22, "desc": "El color de la poma"}, {"x": 310, "y": 195, "r": 25, "desc": "El color de la beguda"}, {"x": 340, "y": 174, "r": 28, "desc": "El color de les flors"}, {"x": 340, "y": 255, "r": 28, "desc": "El gat"}, {"x": 200, "y": 160, "r": 30, "desc": "Les espelmes del pastís"}], "total": 7}}, "4": {"wordsearch": {"grid": [["O", "V", "G", "P", "Y", "V", "C", "Q", "J", "K", "N", "J"], ["I", "N", "C", "D", "N", "E", "F", "F", "J", "A", "X", "N"], ["F", "V", "R", "X", "D", "R", "N", "R", "X", "C", "C", "B"], ["Y", "E", "C", "D", "R", "M", "C", "B", "L", "A", "U", "R"], ["V", "E", "K", "N", "Z", "E", "K", "P", "T", "M", "Y", "O"], ["B", "B", "I", "J", "E", "L", "P", "T", "J", "R", "H", "I"], ["L", "N", "P", "C", "C", "L", "E", "N", "M", "N", "J", "D"], ["A", "C", "U", "B", "O", "T", "A", "R", "O", "N", "J", "A"], ["N", "A", "I", "F", "R", "A", "X", "J", "G", "Y", "V", "O"], ["C", "S", "F", "U", "G", "Q", "V", "M", "Y", "E", "K", "G"], ["I", "O", "O", "Z", "H", "Y", "P", "C", "U", "E", "N", "P"], ["R", "R", "T", "D", "T", "U", "P", "W", "W", "K", "Z", "V"]], "placements": [{"word": "VERMELL", "r": 0, "c": 5, "dr": 1, "dc": 0}, {"word": "BLAU", "r": 3, "c": 7, "dr": 0, "dc": 1}, {"word": "VERD", "r": 4, "c": 0, "dr": -1, "dc": 1}, {"word": "GROC", "r": 9, "c": 4, "dr": -1, "dc": 0}, {"word": "BLANC", "r": 5, "c": 0, "dr": 1, "dc": 0}, {"word": "NEGRE", "r": 10, "c": 10, "dr": -1, "dc": -1}, {"word": "TARONJA", "r": 7, "c": 5, "dr": 0, "dc": 1}, {"word": "ROSA", "r": 11, "c": 1, "dr": -1, "dc": 0}], "words": [{"cat": "Vermell", "native": "Rojo", "key": "VERMELL"}, {"cat": "Blau", "native": "Azul", "key": "BLAU"}, {"cat": "Verd", "native": "Verde", "key": "VERD"}, {"cat": "Groc", "native": "Amarillo", "key": "GROC"}, {"cat": "Blanc", "native": "Blanco", "key": "BLANC"}, {"cat": "Negre", "native": "Negro", "key": "NEGRE"}, {"cat": "Taronja", "native": "Naranja", "key": "TARONJA"}, {"cat": "Rosa", "native": "Rosa", "key": "ROSA"}], "size": 12}, "differences": {"svgA": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#E8F4F8\"/>\n        <!-- Cel -->\n        <rect width=\"400\" height=\"230\" fill=\"#87CEEB\"/>\n        <rect y=\"230\" width=\"400\" height=\"70\" fill=\"#90EE90\"/>\n        <path d=\"M30,200 Q150,80 370,200\" fill=\"none\" stroke=\"#E74C3C\" stroke-width=\"5\" opacity=\"0.7\"/>\n        <path d=\"M40,205 Q150,95 360,205\" fill=\"none\" stroke=\"#F39C12\" stroke-width=\"5\" opacity=\"0.7\"/>\n        <path d=\"M50,210 Q150,110 350,210\" fill=\"none\" stroke=\"#F1C40F\" stroke-width=\"5\" opacity=\"0.7\"/>\n        <path d=\"M60,215 Q150,125 340,215\" fill=\"none\" stroke=\"#2ECC71\" stroke-width=\"5\" opacity=\"0.7\"/>\n        <path d=\"M70,220 Q150,140 330,220\" fill=\"none\" stroke=\"#3498DB\" stroke-width=\"5\" opacity=\"0.7\"/>\n        <path d=\"M80,225 Q150,155 320,225\" fill=\"none\" stroke=\"#9B59B6\" stroke-width=\"5\" opacity=\"0.7\"/>\n        <!-- Estels -->\n        <text x=\"180\" y=\"40\" font-size=\"16\">⭐</text><text x=\"210\" y=\"30\" font-size=\"16\">⭐</text><text x=\"240\" y=\"42\" font-size=\"16\">⭐</text>\n        <!-- Núvols -->\n        <ellipse cx=\"80\" cy=\"60\" rx=\"40\" ry=\"22\" fill=\"white\" opacity=\"0.9\"/>\n        <ellipse cx=\"55\" cy=\"68\" rx=\"25\" ry=\"18\" fill=\"white\" opacity=\"0.9\"/>\n        <ellipse cx=\"105\" cy=\"68\" rx=\"25\" ry=\"18\" fill=\"white\" opacity=\"0.9\"/>\n        <!-- Globus 1 -->\n        <ellipse cx=\"80\" cy=\"130\" rx=\"28\" ry=\"35\" fill=\"#E74C3C\"/>\n        <line x1=\"80\" y1=\"165\" x2=\"80\" y2=\"220\" stroke=\"#666\" stroke-width=\"1.5\"/>\n        <!-- Globus 2 -->\n        <ellipse cx=\"155\" cy=\"120\" rx=\"28\" ry=\"35\" fill=\"#3498DB\"/>\n        <line x1=\"155\" y1=\"155\" x2=\"150\" y2=\"220\" stroke=\"#666\" stroke-width=\"1.5\"/>\n        <!-- Globus 3 -->\n        <ellipse cx=\"230\" cy=\"130\" rx=\"28\" ry=\"35\" fill=\"#F1C40F\"/>\n        <line x1=\"230\" y1=\"165\" x2=\"230\" y2=\"220\" stroke=\"#666\" stroke-width=\"1.5\"/>\n        <!-- Globus 4 -->\n        <ellipse cx=\"305\" cy=\"120\" rx=\"28\" ry=\"35\" fill=\"#2ECC71\"/>\n        <line x1=\"305\" y1=\"155\" x2=\"300\" y2=\"220\" stroke=\"#666\" stroke-width=\"1.5\"/>\n        <!-- Nen amb globus -->\n        <circle cx=\"200\" cy=\"245\" r=\"15\" fill=\"#FDBCB4\"/>\n        <rect x=\"191\" y=\"260\" width=\"18\" height=\"22\" rx=\"3\" fill=\"#9B59B6\"/>\n        <line x1=\"200\" y1=\"260\" x2=\"192\" y2=\"220\" stroke=\"#666\" stroke-width=\"1\"/>\n        <!-- Ocell -->\n        <ellipse cx=\"350\" cy=\"80\" rx=\"12\" ry=\"7\" fill=\"#E74C3C\"/>\n        <circle cx=\"340\" cy=\"77\" r=\"7\" fill=\"#E74C3C\"/>\n        <polygon points=\"333,77 326,74 334,73\" fill=\"#F39C12\"/>\n        <circle cx=\"338\" cy=\"76\" r=\"2\" fill=\"white\"/>\n        <circle cx=\"338\" cy=\"76\" r=\"1\" fill=\"#333\"/>\n        </svg>", "svgB": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#E8F4F8\"/>\n        <!-- Cel -->\n        <rect width=\"400\" height=\"230\" fill=\"#87CEEB\"/>\n        <rect y=\"230\" width=\"400\" height=\"70\" fill=\"#90EE90\"/>\n        \n        <!-- Estels -->\n        <text x=\"210\" y=\"30\" font-size=\"16\">⭐</text>\n        <!-- Núvols -->\n        <ellipse cx=\"80\" cy=\"60\" rx=\"40\" ry=\"22\" fill=\"white\" opacity=\"0.9\"/>\n        <ellipse cx=\"55\" cy=\"68\" rx=\"25\" ry=\"18\" fill=\"white\" opacity=\"0.9\"/>\n        <ellipse cx=\"105\" cy=\"68\" rx=\"25\" ry=\"18\" fill=\"white\" opacity=\"0.9\"/>\n        <!-- Globus 1 -->\n        <ellipse cx=\"80\" cy=\"130\" rx=\"28\" ry=\"35\" fill=\"#3498DB\"/>\n        <line x1=\"80\" y1=\"165\" x2=\"80\" y2=\"220\" stroke=\"#666\" stroke-width=\"1.5\"/>\n        <!-- Globus 2 -->\n        <ellipse cx=\"155\" cy=\"120\" rx=\"28\" ry=\"35\" fill=\"#E74C3C\"/>\n        <line x1=\"155\" y1=\"155\" x2=\"150\" y2=\"220\" stroke=\"#666\" stroke-width=\"1.5\"/>\n        <!-- Globus 3 -->\n        <ellipse cx=\"230\" cy=\"130\" rx=\"28\" ry=\"35\" fill=\"#9B59B6\"/>\n        <line x1=\"230\" y1=\"165\" x2=\"230\" y2=\"220\" stroke=\"#666\" stroke-width=\"1.5\"/>\n        <!-- Globus 4 -->\n        <ellipse cx=\"305\" cy=\"120\" rx=\"28\" ry=\"35\" fill=\"#F39C12\"/>\n        <line x1=\"305\" y1=\"155\" x2=\"300\" y2=\"220\" stroke=\"#666\" stroke-width=\"1.5\"/>\n        <!-- Nen amb globus -->\n        <circle cx=\"200\" cy=\"245\" r=\"15\" fill=\"#FDBCB4\"/>\n        <rect x=\"191\" y=\"260\" width=\"18\" height=\"22\" rx=\"3\" fill=\"#9B59B6\"/>\n        <line x1=\"200\" y1=\"260\" x2=\"192\" y2=\"220\" stroke=\"#666\" stroke-width=\"1\"/>\n        <!-- Ocell -->\n        <ellipse cx=\"350\" cy=\"80\" rx=\"12\" ry=\"7\" fill=\"#2ECC71\"/>\n        <circle cx=\"340\" cy=\"77\" r=\"7\" fill=\"#2ECC71\"/>\n        <polygon points=\"333,77 326,74 334,73\" fill=\"#F39C12\"/>\n        <circle cx=\"338\" cy=\"76\" r=\"2\" fill=\"white\"/>\n        <circle cx=\"338\" cy=\"76\" r=\"1\" fill=\"#333\"/>\n        </svg>", "diffs": [{"x": 80, "y": 130, "r": 35, "desc": "El color del globus 1"}, {"x": 155, "y": 120, "r": 35, "desc": "El color del globus 2"}, {"x": 230, "y": 130, "r": 35, "desc": "El color del globus 3"}, {"x": 305, "y": 120, "r": 35, "desc": "El color del globus 4"}, {"x": 200, "y": 160, "r": 80, "desc": "L'arc de Sant Martí"}, {"x": 210, "y": 35, "r": 45, "desc": "El nombre d'estels"}, {"x": 340, "y": 78, "r": 20, "desc": "El color de l'ocell"}], "total": 7}}, "5": {"wordsearch": {"grid": [["A", "O", "M", "V", "E", "P", "A", "G", "M", "B", "H", "Q"], ["C", "D", "P", "O", "L", "T", "Z", "I", "L", "J", "T", "C"], ["P", "X", "T", "A", "L", "W", "E", "C", "A", "F", "D", "O"], ["L", "A", "N", "Z", "N", "S", "U", "Q", "P", "S", "T", "K"], ["P", "R", "O", "B", "R", "T", "U", "N", "E", "X", "I", "I"], ["W", "R", "R", "E", "D", "E", "A", "T", "E", "N", "T", "M"], ["W", "O", "J", "V", "T", "D", "A", "L", "A", "H", "S", "S"], ["W", "G", "D", "A", "D", "B", "V", "S", "O", "Y", "E", "R"], ["U", "X", "T", "B", "A", "K", "I", "X", "L", "N", "V", "U"], ["A", "G", "Y", "S", "N", "M", "L", "D", "A", "E", "S", "R"], ["I", "Y", "H", "B", "A", "V", "E", "C", "B", "O", "J", "H"], ["Z", "E", "X", "C", "F", "A", "L", "D", "I", "L", "L", "A"]], "placements": [{"word": "CAMISA", "r": 11, "c": 3, "dr": -1, "dc": 1}, {"word": "PANTALONS", "r": 1, "c": 2, "dr": 1, "dc": 1}, {"word": "JAQUETA", "r": 1, "c": 9, "dr": 1, "dc": -1}, {"word": "SABATES", "r": 9, "c": 3, "dr": -1, "dc": 1}, {"word": "VESTIT", "r": 8, "c": 10, "dr": -1, "dc": 0}, {"word": "FALDILLA", "r": 11, "c": 4, "dr": 0, "dc": 1}, {"word": "JERSEI", "r": 6, "c": 2, "dr": -1, "dc": 1}, {"word": "GORRA", "r": 7, "c": 1, "dr": -1, "dc": 0}], "words": [{"cat": "Camisa", "native": "Camisa", "key": "CAMISA"}, {"cat": "Pantalons", "native": "Pantalones", "key": "PANTALONS"}, {"cat": "Jaqueta", "native": "Chaqueta", "key": "JAQUETA"}, {"cat": "Sabates", "native": "Zapatos", "key": "SABATES"}, {"cat": "Vestit", "native": "Vestido", "key": "VESTIT"}, {"cat": "Faldilla", "native": "Falda", "key": "FALDILLA"}, {"cat": "Jersei", "native": "Jersey", "key": "JERSEI"}, {"cat": "Gorra", "native": "Gorra", "key": "GORRA"}], "size": 12}, "differences": {"svgA": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#F0F0F8\"/>\n        <!-- Paret -->\n        <rect width=\"400\" height=\"300\" fill=\"#EEF2F7\"/>\n        <!-- Corda de la roba -->\n        <line x1=\"20\" y1=\"100\" x2=\"380\" y2=\"100\" stroke=\"#A0522D\" stroke-width=\"3\"/>\n        <!-- Boletes de la corda -->\n        <circle cx=\"20\" cy=\"100\" r=\"5\" fill=\"#666\"/>\n        <circle cx=\"380\" cy=\"100\" r=\"5\" fill=\"#666\"/>\n        <!-- Pinces -->\n        <rect x=\"78\" y=\"96\" width=\"4\" height=\"14\" rx=\"1\" fill=\"#999\"/>\n        <rect x=\"148\" y=\"96\" width=\"4\" height=\"14\" rx=\"1\" fill=\"#999\"/>\n        <rect x=\"198\" y=\"96\" width=\"4\" height=\"14\" rx=\"1\" fill=\"#999\"/>\n        <rect x=\"258\" y=\"96\" width=\"4\" height=\"14\" rx=\"1\" fill=\"#999\"/>\n        <rect x=\"308\" y=\"96\" width=\"4\" height=\"14\" rx=\"1\" fill=\"#999\"/>\n        <!-- Camisa -->\n        <rect x=\"60\" y=\"103\" width=\"40\" height=\"50\" rx=\"5\" fill=\"#E74C3C\"/>\n        <polygon points=\"60,103 50,85 75,103\" fill=\"#E74C3C\"/>\n        <polygon points=\"100,103 110,85 85,103\" fill=\"#E74C3C\"/>\n        <!-- Pantalons -->\n        <rect x=\"135\" y=\"103\" width=\"30\" height=\"30\" rx=\"3\" fill=\"#2C3E50\"/>\n        <rect x=\"135\" y=\"130\" width=\"13\" height=\"35\" rx=\"3\" fill=\"#2C3E50\"/>\n        <rect x=\"152\" y=\"130\" width=\"13\" height=\"35\" rx=\"3\" fill=\"#2C3E50\"/>\n        <!-- Vestit -->\n        <polygon points=\"185,103 215,103 225,175 175,175\" fill=\"#FF69B4\"/>\n        <rect x=\"188\" y=\"100\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#FF69B4\"/>\n        <!-- Jersei -->\n        <rect x=\"245\" y=\"103\" width=\"40\" height=\"50\" rx=\"5\" fill=\"#F39C12\"/>\n        <rect x=\"245\" y=\"103\" width=\"40\" height=\"10\" rx=\"3\" fill=\"#333\" opacity=\"0.3\"/>\n        <!-- Gorra -->\n        <ellipse cx=\"310\" cy=\"105\" rx=\"25\" ry=\"12\" fill=\"#E74C3C\"/><rect x=\"285\" y=\"98\" width=\"50\" height=\"12\" rx=\"3\" fill=\"#C0392B\"/><rect x=\"285\" y=\"103\" width=\"55\" height=\"5\" rx=\"2\" fill=\"#E74C3C\"/>\n        <!-- Sabates al terra -->\n        <ellipse cx=\"100\" cy=\"265\" rx=\"22\" ry=\"10\" fill=\"#8B4513\"/>\n        <ellipse cx=\"80\" cy=\"262\" rx=\"22\" ry=\"10\" fill=\"#8B4513\"/>\n        <!-- Cistell roba -->\n        <rect x=\"310\" y=\"200\" width=\"70\" height=\"55\" rx=\"8\" fill=\"#DEB887\"/>\n        <line x1=\"310\" y1=\"215\" x2=\"380\" y2=\"215\" stroke=\"#C8A870\" stroke-width=\"2\"/>\n        <line x1=\"310\" y1=\"230\" x2=\"380\" y2=\"230\" stroke=\"#C8A870\" stroke-width=\"2\"/>\n        <!-- Mirall -->\n        <rect x=\"20\" y=\"150\" width=\"80\" height=\"120\" rx=\"5\" fill=\"#AED6F1\" stroke=\"#999\" stroke-width=\"2\"/>\n        <ellipse cx=\"60\" cy=\"200\" rx=\"28\" ry=\"50\" fill=\"#D6EAF8\" opacity=\"0.5\"/>\n        </svg>", "svgB": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#F0F0F8\"/>\n        <!-- Paret -->\n        <rect width=\"400\" height=\"300\" fill=\"#EEF2F7\"/>\n        <!-- Corda de la roba -->\n        <line x1=\"20\" y1=\"100\" x2=\"380\" y2=\"100\" stroke=\"#E74C3C\" stroke-width=\"3\"/>\n        <!-- Boletes de la corda -->\n        <circle cx=\"20\" cy=\"100\" r=\"5\" fill=\"#666\"/>\n        <circle cx=\"380\" cy=\"100\" r=\"5\" fill=\"#666\"/>\n        <!-- Pinces -->\n        <rect x=\"78\" y=\"96\" width=\"4\" height=\"14\" rx=\"1\" fill=\"#999\"/>\n        <rect x=\"148\" y=\"96\" width=\"4\" height=\"14\" rx=\"1\" fill=\"#999\"/>\n        <rect x=\"198\" y=\"96\" width=\"4\" height=\"14\" rx=\"1\" fill=\"#999\"/>\n        <rect x=\"258\" y=\"96\" width=\"4\" height=\"14\" rx=\"1\" fill=\"#999\"/>\n        <rect x=\"308\" y=\"96\" width=\"4\" height=\"14\" rx=\"1\" fill=\"#999\"/>\n        <!-- Camisa -->\n        <rect x=\"60\" y=\"103\" width=\"40\" height=\"50\" rx=\"5\" fill=\"#3498DB\"/>\n        <polygon points=\"60,103 50,85 75,103\" fill=\"#3498DB\"/>\n        <polygon points=\"100,103 110,85 85,103\" fill=\"#3498DB\"/>\n        <!-- Pantalons -->\n        <rect x=\"135\" y=\"103\" width=\"30\" height=\"30\" rx=\"3\" fill=\"#8E44AD\"/>\n        <rect x=\"135\" y=\"130\" width=\"13\" height=\"35\" rx=\"3\" fill=\"#8E44AD\"/>\n        <rect x=\"152\" y=\"130\" width=\"13\" height=\"35\" rx=\"3\" fill=\"#8E44AD\"/>\n        <!-- Vestit -->\n        <polygon points=\"185,103 215,103 225,175 175,175\" fill=\"#F1C40F\"/>\n        <rect x=\"188\" y=\"100\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#F1C40F\"/>\n        <!-- Jersei -->\n        <rect x=\"245\" y=\"103\" width=\"40\" height=\"50\" rx=\"5\" fill=\"#2ECC71\"/>\n        <rect x=\"245\" y=\"103\" width=\"40\" height=\"10\" rx=\"3\" fill=\"#333\" opacity=\"0.3\"/>\n        <!-- Gorra -->\n        \n        <!-- Sabates al terra -->\n        <ellipse cx=\"100\" cy=\"265\" rx=\"22\" ry=\"10\" fill=\"#2C3E50\"/>\n        <ellipse cx=\"80\" cy=\"262\" rx=\"22\" ry=\"10\" fill=\"#2C3E50\"/>\n        <!-- Cistell roba -->\n        <rect x=\"310\" y=\"200\" width=\"70\" height=\"55\" rx=\"8\" fill=\"#DEB887\"/>\n        <line x1=\"310\" y1=\"215\" x2=\"380\" y2=\"215\" stroke=\"#C8A870\" stroke-width=\"2\"/>\n        <line x1=\"310\" y1=\"230\" x2=\"380\" y2=\"230\" stroke=\"#C8A870\" stroke-width=\"2\"/>\n        <!-- Mirall -->\n        <rect x=\"20\" y=\"150\" width=\"80\" height=\"120\" rx=\"5\" fill=\"#AED6F1\" stroke=\"#999\" stroke-width=\"2\"/>\n        <ellipse cx=\"60\" cy=\"200\" rx=\"28\" ry=\"50\" fill=\"#D6EAF8\" opacity=\"0.5\"/>\n        </svg>", "diffs": [{"x": 80, "y": 128, "r": 35, "desc": "El color de la camisa"}, {"x": 150, "y": 140, "r": 35, "desc": "El color dels pantalons"}, {"x": 200, "y": 138, "r": 45, "desc": "El color del vestit"}, {"x": 90, "y": 263, "r": 30, "desc": "El color de les sabates"}, {"x": 310, "y": 102, "r": 30, "desc": "La gorra"}, {"x": 265, "y": 128, "r": 35, "desc": "El color del jersei"}, {"x": 200, "y": 100, "r": 80, "desc": "El color de la corda"}], "total": 7}}, "6": {"wordsearch": {"grid": [["S", "X", "Z", "X", "S", "U", "O", "J", "I", "D", "Q", "S"], ["D", "T", "V", "X", "D", "A", "K", "T", "W", "C", "E", "M"], ["I", "G", "R", "S", "A", "I", "K", "X", "Y", "R", "Z", "U"], ["S", "D", "R", "A", "O", "J", "L", "L", "D", "E", "R", "A"], ["S", "A", "O", "N", "M", "M", "N", "N", "P", "C", "C", "P"], ["A", "P", "P", "R", "Z", "I", "E", "R", "Q", "F", "A", "Y"], ["B", "F", "H", "A", "H", "V", "D", "A", "I", "P", "A", "K"], ["T", "P", "D", "B", "I", "L", "G", "W", "O", "H", "C", "H"], ["E", "P", "O", "D", "N", "A", "M", "Y", "M", "W", "A", "O"], ["A", "W", "R", "M", "D", "I", "L", "L", "U", "N", "S", "R"], ["J", "D", "I", "M", "E", "C", "R", "E", "S", "K", "Q", "O"], ["X", "K", "R", "D", "I", "U", "M", "E", "N", "G", "E", "H"]], "placements": [{"word": "DILLUNS", "r": 9, "c": 4, "dr": 0, "dc": 1}, {"word": "DIMARTS", "r": 6, "c": 6, "dr": -1, "dc": -1}, {"word": "DIMECRES", "r": 10, "c": 1, "dr": 0, "dc": 1}, {"word": "DIJOUS", "r": 0, "c": 9, "dr": 0, "dc": -1}, {"word": "DIVENDRES", "r": 8, "c": 3, "dr": -1, "dc": 1}, {"word": "DISSABTE", "r": 1, "c": 0, "dr": 1, "dc": 0}, {"word": "DIUMENGE", "r": 11, "c": 3, "dr": 0, "dc": 1}, {"word": "AHIR", "r": 8, "c": 10, "dr": -1, "dc": -1}], "words": [{"cat": "Dilluns", "native": "Lunes", "key": "DILLUNS"}, {"cat": "Dimarts", "native": "Martes", "key": "DIMARTS"}, {"cat": "Dimecres", "native": "Miércoles", "key": "DIMECRES"}, {"cat": "Dijous", "native": "Jueves", "key": "DIJOUS"}, {"cat": "Divendres", "native": "Viernes", "key": "DIVENDRES"}, {"cat": "Dissabte", "native": "Sábado", "key": "DISSABTE"}, {"cat": "Diumenge", "native": "Domingo", "key": "DIUMENGE"}, {"cat": "Ahir", "native": "Ayer", "key": "AHIR"}], "size": 12}, "differences": {"svgA": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#F8F8F0\"/>\n        <!-- Cel -->\n        <rect width=\"400\" height=\"150\" fill=\"#E8F4F8\"/>\n        <!-- Celestial -->\n        <circle cx=\"350\" cy=\"50\" r=\"30\" fill=\"#FFD700\"/>\n        <!-- Ocell -->\n        <ellipse cx=\"280\" cy=\"65\" rx=\"12\" ry=\"7\" fill=\"#E74C3C\"/>\n        <circle cx=\"270\" cy=\"62\" r=\"7\" fill=\"#E74C3C\"/>\n        <polygon points=\"263,62 256,59 264,58\" fill=\"#F39C12\"/>\n        <!-- Rellotge de paret -->\n        <circle cx=\"60\" cy=\"160\" r=\"35\" fill=\"white\" stroke=\"#555\" stroke-width=\"3\"/>\n        <line x1=\"60\" y1=\"160\" x2=\"70\" y2=\"154\" stroke=\"#333\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n        <line x1=\"60\" y1=\"160\" x2=\"60\" y2=\"142\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n        <circle cx=\"60\" cy=\"160\" r=\"3\" fill=\"#E74C3C\"/>\n        <text x=\"60\" y=\"138\" text-anchor=\"middle\" font-size=\"8\" fill=\"#999\">12</text>\n        <text x=\"60\" y=\"186\" text-anchor=\"middle\" font-size=\"8\" fill=\"#999\">6</text>\n        <text x=\"36\" y=\"163\" text-anchor=\"middle\" font-size=\"8\" fill=\"#999\">9</text>\n        <text x=\"84\" y=\"163\" text-anchor=\"middle\" font-size=\"8\" fill=\"#999\">3</text>\n        <!-- Calendari -->\n        <rect x=\"130\" y=\"155\" width=\"235\" height=\"120\" rx=\"8\" fill=\"white\" stroke=\"#DDD\" stroke-width=\"2\"/>\n        <rect x=\"130\" y=\"155\" width=\"235\" height=\"25\" rx=\"8\" fill=\"#E74C3C\"/>\n        <text x=\"247\" y=\"173\" text-anchor=\"middle\" font-size=\"12\" fill=\"white\" font-weight=\"bold\">ABRIL</text>\n        <rect x=\"133\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"145\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DL</text><rect x=\"165\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"177\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DM</text><rect x=\"197\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"209\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DC</text><rect x=\"229\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"#E74C3C\"/><text x=\"241\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"white\" font-weight=\"bold\">DJ</text><rect x=\"261\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"273\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DV</text><rect x=\"293\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"305\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DS</text><rect x=\"325\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"337\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DG</text>\n        <text x=\"145\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">1</text><text x=\"177\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">2</text><text x=\"209\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">3</text><text x=\"241\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">4</text><text x=\"273\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">5</text><text x=\"305\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">6</text><text x=\"337\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">7</text><text x=\"145\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">8</text><text x=\"177\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">9</text><text x=\"209\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">10</text><text x=\"241\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">11</text><text x=\"273\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">12</text><text x=\"305\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">13</text><text x=\"337\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">14</text><text x=\"145\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">15</text><text x=\"177\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">16</text><text x=\"209\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">17</text><text x=\"241\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">18</text><text x=\"273\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">19</text><text x=\"305\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">20</text><text x=\"337\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">21</text><text x=\"145\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">22</text><text x=\"177\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">23</text><text x=\"209\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">24</text><text x=\"241\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">25</text><text x=\"273\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">26</text><text x=\"305\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">27</text><text x=\"337\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">28</text>\n        <!-- Flor -->\n        <circle cx=\"330\" cy=\"240\" r=\"10\" fill=\"#FF69B4\"/><circle cx=\"320\" cy=\"230\" r=\"8\" fill=\"#FF69B4\"/><circle cx=\"340\" cy=\"230\" r=\"8\" fill=\"#FF69B4\"/><circle cx=\"330\" cy=\"232\" r=\"6\" fill=\"#FFD700\"/><line x1=\"330\" y1=\"250\" x2=\"330\" y2=\"265\" stroke=\"#228B22\" stroke-width=\"2\"/>\n        <!-- Terra/catifa -->\n        <rect y=\"270\" width=\"400\" height=\"30\" fill=\"#DEB887\" opacity=\"0.5\"/>\n        </svg>", "svgB": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" style=\"width:100%;max-width:400px;border-radius:12px;border:2px solid #e0e0e0;background:#fff\">\n        <rect width=\"400\" height=\"300\" fill=\"#F8F8F0\"/>\n        <!-- Cel -->\n        <rect width=\"400\" height=\"150\" fill=\"#E8F4F8\"/>\n        <!-- Celestial -->\n        <circle cx=\"350\" cy=\"50\" r=\"25\" fill=\"#F0F0F0\"/><circle cx=\"362\" cy=\"42\" r=\"18\" fill=\"#87CEEB\"/>\n        <!-- Ocell -->\n        <ellipse cx=\"280\" cy=\"65\" rx=\"12\" ry=\"7\" fill=\"#2ECC71\"/>\n        <circle cx=\"270\" cy=\"62\" r=\"7\" fill=\"#2ECC71\"/>\n        <polygon points=\"263,62 256,59 264,58\" fill=\"#F39C12\"/>\n        <!-- Rellotge de paret -->\n        <circle cx=\"60\" cy=\"160\" r=\"35\" fill=\"white\" stroke=\"#555\" stroke-width=\"3\"/>\n        <line x1=\"60\" y1=\"160\" x2=\"66\" y2=\"150\" stroke=\"#333\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n        <line x1=\"60\" y1=\"160\" x2=\"78\" y2=\"160\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n        <circle cx=\"60\" cy=\"160\" r=\"3\" fill=\"#E74C3C\"/>\n        <text x=\"60\" y=\"138\" text-anchor=\"middle\" font-size=\"8\" fill=\"#999\">12</text>\n        <text x=\"60\" y=\"186\" text-anchor=\"middle\" font-size=\"8\" fill=\"#999\">6</text>\n        <text x=\"36\" y=\"163\" text-anchor=\"middle\" font-size=\"8\" fill=\"#999\">9</text>\n        <text x=\"84\" y=\"163\" text-anchor=\"middle\" font-size=\"8\" fill=\"#999\">3</text>\n        <!-- Calendari -->\n        <rect x=\"130\" y=\"155\" width=\"235\" height=\"120\" rx=\"8\" fill=\"white\" stroke=\"#DDD\" stroke-width=\"2\"/>\n        <rect x=\"130\" y=\"155\" width=\"235\" height=\"25\" rx=\"8\" fill=\"#3498DB\"/>\n        <text x=\"247\" y=\"173\" text-anchor=\"middle\" font-size=\"12\" fill=\"white\" font-weight=\"bold\">MAIG</text>\n        <rect x=\"133\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"145\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DL</text><rect x=\"165\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"177\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DM</text><rect x=\"197\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"209\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DC</text><rect x=\"229\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"241\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DJ</text><rect x=\"261\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"273\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DV</text><rect x=\"293\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"#3498DB\"/><text x=\"305\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"white\" font-weight=\"bold\">DS</text><rect x=\"325\" y=\"175\" width=\"24\" height=\"24\" rx=\"3\" fill=\"none\"/><text x=\"337\" y=\"191\" text-anchor=\"middle\" font-size=\"11\" fill=\"#333\" font-weight=\"bold\">DG</text>\n        <text x=\"145\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">1</text><text x=\"177\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">2</text><text x=\"209\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">3</text><text x=\"241\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">4</text><text x=\"273\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">5</text><text x=\"305\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">6</text><text x=\"337\" y=\"215\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">7</text><text x=\"145\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">8</text><text x=\"177\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">9</text><text x=\"209\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">10</text><text x=\"241\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">11</text><text x=\"273\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">12</text><text x=\"305\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">13</text><text x=\"337\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">14</text><text x=\"145\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">15</text><text x=\"177\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">16</text><text x=\"209\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">17</text><text x=\"241\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">18</text><text x=\"273\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">19</text><text x=\"305\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">20</text><text x=\"337\" y=\"259\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">21</text><text x=\"145\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">22</text><text x=\"177\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">23</text><text x=\"209\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">24</text><text x=\"241\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">25</text><text x=\"273\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">26</text><text x=\"305\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">27</text><text x=\"337\" y=\"281\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">28</text>\n        <!-- Flor -->\n        \n        <!-- Terra/catifa -->\n        <rect y=\"270\" width=\"400\" height=\"30\" fill=\"#DEB887\" opacity=\"0.5\"/>\n        </svg>", "diffs": [{"x": 247, "y": 168, "r": 50, "desc": "El color de la capçalera del calendari"}, {"x": 247, "y": 191, "r": 80, "desc": "El dia marcat"}, {"x": 350, "y": 50, "r": 40, "desc": "El sol o la lluna"}, {"x": 60, "y": 160, "r": 38, "desc": "L'hora del rellotge"}, {"x": 270, "y": 63, "r": 20, "desc": "El color de l'ocell"}, {"x": 330, "y": 240, "r": 30, "desc": "La flor"}, {"x": 247, "y": 168, "r": 20, "desc": "El nom del mes"}], "total": 7}}});  // game data per lliçó
+ 
+// Afegeix etiquetes d'exercici a UI
+['translate','listen','fill','order','match'].forEach(k => {
+  if (!UI[k]) UI[k] = k;
+});
+ 
 // ═══════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════
 let S = {
-  screen:'home',
-  lessonIdx:0, exIdx:0,
-  lives:3, xp:0,
-  completed:new Set(),
-  feedback:null,
-  // word order
-  woAns:[],
-  // match
-  matchSel:null, matchDone:[],
-  score:0, total:0
+  screen:'home', subscreen:null, // 'exercises'|'games'|'wordsearch'|'differences'
+  li:0, ei:0,
+  lives:3, xp:0, done:new Set(),
+  fb:null, wa:[], ms:null, md:[], sc:0, tot:0,
+  // Word search
+  wsFound:[], wsSelecting:[], wsStartCell:null, wsColors:[],
+  // Differences
+  diffsFound:[], diffClicks:[],
 };
-
-// ═══════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════
-const $= id=>document.getElementById(id);
-const lesson=()=>LESSONS[S.lessonIdx];
-const ex=()=>lesson().exercises[S.exIdx];
-const speak=(t,l)=>{
-  if('speechSynthesis'in window){
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(t);
-    u.lang=l||CFG.catLang; u.rate=0.8;
-    speechSynthesis.speak(u);
-  }
-};
-
-function updateTopBar(){
-  const total=LESSONS.reduce((a,l)=>a+l.exercises.length,0);
-  const done=[...S.completed].reduce((a,i)=>a+LESSONS[i].exercises.length,0)
-            +(S.screen==='exercise'?S.exIdx:0);
-  $('prog').style.width=(done/total*100)+'%';
-  let h=''; for(let i=0;i<3;i++) h+=i<S.lives?'❤️':'🖤';
-  $('hearts').innerHTML=h;
-  $('xpBadge').textContent=S.xp+' XP';
+ 
+const $  = id => document.getElementById(id);
+const L  = () => LESS[S.li];
+const E  = () => L().exercises[S.ei];
+const GDL= () => GD[S.li];
+ 
+function speak(t,l){
+  if('speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=l||'ca-ES';u.rate=0.8;speechSynthesis.speak(u);}
 }
-
+ 
+function upBar(){
+  const tot=LESS.reduce((a,l)=>a+l.exercises.length,0);
+  const dn=[...S.done].reduce((a,i)=>a+LESS[i].exercises.length,0)+(S.screen==='exercise'?S.ei:0);
+  $('pb').style.width=(dn/tot*100)+'%';
+  let h='';for(let i=0;i<3;i++)h+=i<S.lives?'❤️':'🖤';
+  $('hts').innerHTML=h;$('xpb').textContent=S.xp+' XP';
+}
+ 
 // ═══════════════════════════════════════
 // RENDER ROUTER
 // ═══════════════════════════════════════
 function render(){
   const app=$('app');
-  if(S.screen==='home') app.innerHTML=renderHome();
-  else if(S.screen==='exercise') app.innerHTML=renderExercise();
-  else if(S.screen==='complete') app.innerHTML=renderComplete();
-  updateTopBar();
-  bind();
+  if(S.screen==='home')       app.innerHTML=rHome();
+  else if(S.screen==='exercise') app.innerHTML=rEx();
+  else if(S.screen==='complete') app.innerHTML=rComp();
+  else if(S.screen==='games')    app.innerHTML=rGamesMenu();
+  else if(S.screen==='wordsearch') app.innerHTML=rWordSearch();
+  else if(S.screen==='differences') app.innerHTML=rDifferences();
+  upBar(); bind();
 }
-
+ 
 // ═══════════════════════════════════════
 // HOME
 // ═══════════════════════════════════════
-function renderHome(){
-  let h=`<div class="section-lbl">${UI.appTitle}</div>
-  <p style="color:rgba(255,255,255,.65);font-size:.9rem;margin-bottom:16px">${UI.subLine}</p>
-  <div class="lesson-list">`;
-  LESSONS.forEach((l,i)=>{
-    const done=S.completed.has(i);
-    const locked=i>0&&!S.completed.has(i-1)&&!done;
-    const stars=done?'⭐⭐⭐':(i===S.lessonIdx&&S.exIdx>0?'⭐☆☆':'☆☆☆');
-    h+=`<button class="lesson-btn ${done?'done':''} ${locked?'locked':''}" data-li="${i}">
-      <span class="l-icon">${l.icon}</span>
-      <div class="l-info">
-        <div class="l-title">${l.title}</div>
-        <div class="l-sub">${l.titleNative}</div>
-        <div class="l-stars">${stars}</div>
+function rHome(){
+  let h=`<div class="slbl">${UI.appTitle}</div>
+  <p style="color:rgba(255,255,255,.6);font-size:.88rem;margin-bottom:14px">${UI.subLine}</p>
+  <div class="llist">`;
+  LESS.forEach((l,i)=>{
+    const dn=S.done.has(i),lk=i>0&&!S.done.has(i-1)&&!dn;
+    const st=dn?'⭐⭐⭐':(i===S.li&&S.ei>0?'⭐☆☆':'☆☆☆');
+    h+=`<div class="lbtn ${dn?'done':''} ${lk?'locked':''}" style="flex-direction:column;align-items:stretch;gap:8px">
+      <div style="display:flex;align-items:center;gap:13px">
+        <span class="li">${l.icon}</span>
+        <div class="linf"><div class="lt">${l.title}</div><div class="ls">${l.titleNative}</div><div class="lstar">${st}</div></div>
       </div>
-      <span class="l-arr">${locked?UI.locked:'▶'}</span>
-    </button>`;
+      ${!lk?`<div class="lbtns">
+        <button class="go-ex" data-li="${i}" data-mode="ex">📚 ${UI.exercises||'Exercicis'}</button>
+        <button class="go-games" data-li="${i}" data-mode="games">🎮 ${GL.games}</button>
+      </div>`:'<div style="text-align:center;color:#afafaf;font-size:.8rem">🔒</div>'}
+    </div>`;
   });
-  h+=`</div>`;
-  return h;
+  return h+'</div>';
 }
-
+ 
 // ═══════════════════════════════════════
-// EXERCISE WRAPPER
+// GAMES MENU
 // ═══════════════════════════════════════
-function renderExercise(){
-  const l=lesson(), e=ex();
-  let inner='';
-  if(e.type==='translate') inner=renderTranslate(e);
-  else if(e.type==='listen')    inner=renderListen(e);
-  else if(e.type==='fill')      inner=renderFill(e);
-  else if(e.type==='order')     inner=renderOrder(e);
-  else if(e.type==='match')     inner=renderMatch(e);
-
-  const fb=S.feedback;
-  const fbHtml=fb?`<div class="feedback ${fb.ok?'ok':'ko'}">
-    <span class="fb-icon">${fb.ok?'🎉':'💔'}</span>
-    <div><div>${fb.ok?UI.correct:UI.wrong}</div>
-    ${!fb.ok?`<div class="fb-hint">${UI.correctAnswer} <strong>${fb.ans}</strong></div>`:''}
-    </div></div>`:'';
-
-  return `<div class="card">
-    <div class="lesson-hdr">
-      <div class="lh-icon">${l.icon}</div>
-      <div class="lh-title">${l.title}</div>
-      <div class="lh-sub">${l.titleNative} · ${S.exIdx+1}/${l.exercises.length}</div>
+function rGamesMenu(){
+  const l=L();
+  return `
+  <button class="backbtn" id="backHome">← ${GL.back_lesson}</button>
+  <div class="card">
+    <div class="lhdr">
+      <div class="lhi">${l.icon}</div>
+      <div class="lht">${l.title}</div>
+      <div class="lhs">🎮 ${GL.games}</div>
     </div>
-    <div class="ex-badge">${UI[e.type]}</div>
-    ${inner}
-    ${fbHtml}
-    ${fb?`<button class="continue-btn" id="contBtn">${UI.continue}</button>`:''}
-  </div>`;
-}
-
-// ═══════════════════════════════════════
-// EXERCISE TYPES
-// ═══════════════════════════════════════
-function renderTranslate(e){
-  return`<div class="question">${e.q}</div>
-  <div class="opts">${e.options.map((o,i)=>{
-    let cls='';
-    if(S.feedback)cls=i===e.correct?'correct':(S.feedback.chosen===i?'wrong':'dim');
-    return`<button class="opt ${cls}" data-oi="${i}">${o}</button>`;
-  }).join('')}</div>`;
-}
-
-function renderListen(e){
-  return`<div class="question">${UI.listen}</div>
-  <button class="listen-btn" id="lisBtn">${UI.listenPlay}</button>
-  <div class="opts">${e.options.map((o,i)=>{
-    let cls='';
-    if(S.feedback)cls=i===e.correct?'correct':(S.feedback.chosen===i?'wrong':'dim');
-    return`<button class="opt ${cls}" data-oi="${i}">${o}</button>`;
-  }).join('')}</div>`;
-}
-
-function renderFill(e){
-  const parts=e.sentence.split('___');
-  const cls=S.feedback?(S.feedback.ok?'correct':'wrong'):'';
-  return`<div class="question">${e.hint}</div>
-  <div class="fill-wrap">${parts[0]}<input class="blank ${cls}" id="blankIn"
-    value="${S.feedback?e.blank:''}" placeholder="..." ${S.feedback?'disabled':''}>${parts[1]||''}</div>
-  <div class="opts">${e.options.map(o=>{
-    let cls='';
-    if(S.feedback)cls=o===e.blank?'correct':(S.feedback.chosen===o&&o!==e.blank?'wrong':'dim');
-    return`<button class="opt ${cls}" data-fw="${o}">${o}</button>`;
-  }).join('')}</div>`;
-}
-
-function renderOrder(e){
-  const ans=S.woAns;
-  const nativeKey=CFG.langCode==='nl'?'nl':CFG.langCode==='es'?'es':
-                  CFG.langCode==='ar'?'ar':CFG.langCode==='uk'?'uk':
-                  CFG.langCode==='ru'?'ru':'pa';
-  const nativeSentence=e[nativeKey]||e.nl||e.es||e.ar||e.uk||e.ru||e.pa||'';
-  return`<div class="question">${UI.order}: <em style="color:#888;font-weight:600">${nativeSentence}</em></div>
-  <div class="wo-dropzone" id="woDrop">
-    ${ans.map((w,i)=>`<button class="chip placed" data-di="${i}">${w}</button>`).join('')}
-  </div>
-  <div class="wo-bank" id="woBank">
-    ${e.words.map((w,i)=>`<button class="chip ${ans.includes(w)?'ghost':''}" data-bi="${i}">${w}</button>`).join('')}
-  </div>
-  ${!S.feedback&&ans.length>0?`<button class="check-btn" id="chkOrd">${UI.check}</button>`:''}`;
-}
-
-function renderMatch(e){
-  const left=e.pairs.map(p=>p[0]);
-  const right=e.pairs.map(p=>p[1]);
-  return`<div class="question">${UI.match}</div>
-  <div class="match-wrap">
-    <div class="match-col">${left.map(w=>{
-      const done=S.matchDone.some(d=>d[0]===w);
-      return`<button class="match-btn ${done?'hit':S.matchSel===w?'sel':''}" data-ml="${w}">${w}</button>`;
-    }).join('')}</div>
-    <div class="match-col">${right.map(w=>{
-      const done=S.matchDone.some(d=>d[1]===w);
-      return`<button class="match-btn ${done?'hit':''}" data-mr="${w}">${w}</button>`;
-    }).join('')}</div>
-  </div>`;
-}
-
-// ═══════════════════════════════════════
-// COMPLETE
-// ═══════════════════════════════════════
-function renderComplete(){
-  const acc=S.total>0?Math.round(S.score/S.total*100):100;
-  return`<div class="card complete">
-    <span class="trophy">🏆</span>
-    <div class="complete-title">${UI.lessonComplete}</div>
-    <div class="stats">
-      <div class="stat"><div class="stat-v">+${S.xp}</div><div class="stat-l">${UI.xpEarned}</div></div>
-      <div class="stat"><div class="stat-v">${acc}%</div><div class="stat-l">${UI.accuracy}</div></div>
-      <div class="stat"><div class="stat-v">${S.lives}</div><div class="stat-l">❤️ ${UI.lives}</div></div>
+    <div class="games-menu">
+      <button class="game-card" id="goWS">
+        <span class="gc-icon">🔍</span>
+        <div class="gc-info">
+          <div class="gc-title">${GL.wordsearch}</div>
+          <div class="gc-sub">${GL.findwords}</div>
+        </div>
+      </button>
+      <button class="game-card" id="goDiff">
+        <span class="gc-icon">🕵️</span>
+        <div class="gc-info">
+          <div class="gc-title">${GL.differences}</div>
+          <div class="gc-sub">${GL.finddiffs}</div>
+        </div>
+      </button>
     </div>
-    <button class="continue-btn" id="homeBtn">${UI.backHome}</button>
   </div>`;
 }
-
+ 
+// ═══════════════════════════════════════
+// WORD SEARCH
+// ═══════════════════════════════════════
+function rWordSearch(){
+  const ws = GDL().wordsearch;
+  const grid = ws.grid;
+  const size = ws.size;
+  const words = ws.words;
+ 
+  // Colors per paraula trobada
+  const COLORS = ['found','found-alt','found','found-alt','found','found-alt','found','found-alt'];
+ 
+  // Calcula quines cel·les estan trobades
+  const foundCells = {};
+  S.wsFound.forEach((fw,fi) => {
+    const pl = ws.placements.find(p=>p.word===fw);
+    if(!pl) return;
+    const colorCls = COLORS[fi % COLORS.length];
+    for(let i=0;i<fw.length;i++) {
+      foundCells[`${pl.r+pl.dr*i}-${pl.c+pl.dc*i}`] = colorCls;
+    }
+  });
+ 
+  let gridHtml = `<div class="ws-grid" style="grid-template-columns:repeat(${size},30px)">`;
+  for(let r=0;r<size;r++) for(let c=0;c<size;c++) {
+    const key=`${r}-${c}`;
+    const fc=foundCells[key]||'';
+    const sel=S.wsSelecting.some(x=>x.r===r&&x.c===c)?'selecting':'';
+    gridHtml += `<div class="ws-cell ${fc||sel}" data-r="${r}" data-c="${c}">${grid[r][c]}</div>`;
+  }
+  gridHtml += '</div>';
+ 
+  let wordListHtml = `<div class="ws-wordlist"><h3>${GL.wordlist}</h3>`;
+  words.forEach(w => {
+    const hit = S.wsFound.includes(w.key);
+    wordListHtml += `<div class="ws-word ${hit?'hit':''}">
+      <span class="wcat">${hit?'✓ ':''}${w.cat}</span>
+      <span class="wnative">${w.native}</span>
+    </div>`;
+  });
+  wordListHtml += '</div>';
+ 
+  const allFound = S.wsFound.length >= words.length;
+ 
+  return `
+  <button class="backbtn" id="backGames">← ${GL.back_lesson}</button>
+  <div class="card">
+    <div class="lhdr">
+      <div class="lhi">🔍</div>
+      <div class="lht">${GL.wordsearch}</div>
+      <div class="lhs">${L().title} — ${GL.findwords}</div>
+    </div>
+    <div class="ws-found-count">${S.wsFound.length} / ${words.length} ${GL.found}</div>
+    ${allFound?`<div style="text-align:center;font-size:2rem;margin-bottom:12px">🎉</div><div style="text-align:center;font-family:$'Pacifico',sans-serif;font-size:1.3rem;color:var(--bg);margin-bottom:16px">${GL.solved}</div>`:''}
+    <div class="ws-container">
+      <div class="ws-grid-wrap">${gridHtml}</div>
+      ${wordListHtml}
+    </div>
+    <div style="margin-top:14px;display:flex;gap:10px">
+      <button class="chkbtn" id="wsReset" style="flex:1">${GL.reset}</button>
+    </div>
+  </div>`;
+}
+ 
+// ═══════════════════════════════════════
+// 7 DIFERÈNCIES
+// ═══════════════════════════════════════
+function rDifferences(){
+  const df = GDL().differences;
+  const found = S.diffsFound;
+ 
+  let diffListHtml = '<div class="diff-list">';
+  df.diffs.forEach((d,i) => {
+    diffListHtml += `<div class="diff-item ${found.includes(i)?'found':''}">
+      ${found.includes(i)?'✓':'?'} ${found.includes(i)?d.desc:'???'}
+    </div>`;
+  });
+  diffListHtml += '</div>';
+ 
+  const allFound = found.length >= 7;
+ 
+  return `
+  <button class="backbtn" id="backGames">← ${GL.back_lesson}</button>
+  <div class="card">
+    <div class="lhdr">
+      <div class="lhi">🕵️</div>
+      <div class="lht">${GL.differences}</div>
+      <div class="lhs">${L().title} — ${GL.finddiffs}</div>
+    </div>
+    <div class="diff-count">${found.length} / 7 ${GL.found}</div>
+    ${allFound?`<div style="text-align:center;font-size:2rem;margin-bottom:12px">🎉</div><div style="text-align:center;font-family:$'Pacifico',sans-serif;font-size:1.3rem;color:var(--bg);margin-bottom:12px">${GL.solved}</div>`:''}
+    <p style="text-align:center;font-size:.85rem;color:var(--mut);margin-bottom:14px">${GL.clickdiff}</p>
+    <div class="diff-container">
+      <div class="diff-images">
+        <div class="diff-img-wrap" id="imgA">
+          <div class="diff-label">A</div>
+          ${df.svgA}
+        </div>
+        <div class="diff-img-wrap" id="imgB">
+          <div class="diff-label">B</div>
+          ${df.svgB}
+        </div>
+      </div>
+      ${diffListHtml}
+      <button class="chkbtn" id="diffReset">${GL.reset}</button>
+    </div>
+  </div>`;
+}
+ 
+// ═══════════════════════════════════════
+// EXERCISE SCREENS (igual que gen2)
+// ═══════════════════════════════════════
+function rEx(){
+  const l=L(),e=E();
+  let inn='';
+  if(e.type==='translate')inn=rTr(e);
+  else if(e.type==='listen')inn=rLis(e);
+  else if(e.type==='fill')inn=rFill(e);
+  else if(e.type==='order')inn=rOrd(e);
+  else if(e.type==='match')inn=rMatch(e);
+  const f=S.fb;
+  const fh=f?`<div class="fb ${f.ok?'ok':'ko'}"><span class="fbi">${f.ok?'🎉':'💔'}</span><div><div>${f.ok?UI.correct:UI.wrong}</div>${!f.ok?`<div class="fbh">${UI.ca} <strong>${f.ans}</strong></div>`:''}</div></div>`:'';
+  return `<button class="backbtn" id="backHome2">← ${UI.back||'←'}</button>
+  <div class="card"><div class="lhdr"><div class="lhi">${l.icon}</div><div class="lht">${l.title}</div>
+  <div class="lhs">${l.titleNative} · ${S.ei+1}/${l.exercises.length}</div></div>
+  <div class="exb">${UI[e.type]||e.type}</div>${inn}${fh}
+  ${f?`<button class="conbtn" id="cb">${UI.continue}</button>`:''}
+  </div>`;
+}
+function rTr(e){return`<div class="q">${e.q}</div><div class="opts">${e.options.map((o,i)=>{let c='';if(S.fb)c=i===e.correct?'correct':(S.fb.chosen===i?'wrong':'dim');return`<button class="opt ${c}" data-oi="${i}">${o}</button>`;}).join('')}</div>`;}
+function rLis(e){return`<div class="q">${UI.listen}</div><button class="lisbtn" id="lb">${UI.listen}</button><div class="opts">${e.options.map((o,i)=>{let c='';if(S.fb)c=i===e.correct?'correct':(S.fb.chosen===i?'wrong':'dim');return`<button class="opt ${c}" data-oi="${i}">${o}</button>`;}).join('')}</div>`;}
+function rFill(e){const p=e.sentence.split('___');const c=S.fb?(S.fb.ok?'correct':'wrong'):'';return`<div class="q">${e.hint}</div><div class="fw">${p[0]}<input class="blank ${c}" value="${S.fb?e.blank:''}" placeholder="..." ${S.fb?'disabled':''}>${p[1]||''}</div><div class="opts">${e.options.map(o=>{let c='';if(S.fb)c=o===e.blank?'correct':(S.fb.chosen===o&&o!==e.blank?'wrong':'dim');return`<button class="opt ${c}" data-fw="${o}">${o}</button>`;}).join('')}</div>`;}
+function rOrd(e){const a=S.wa,nat=e.native||'';return`<div class="q">${UI.order||'Order'}: <em style="color:#888;font-weight:600">${nat}</em></div><div class="wdrop" id="wd">${a.map((w,i)=>`<button class="chip placed" data-di="${i}">${w}</button>`).join('')}</div><div class="wbank" id="wb">${e.words.map((w,i)=>`<button class="chip ${a.includes(w)?'ghost':''}" data-bi="${i}">${w}</button>`).join('')}</div>${!S.fb&&a.length>0?`<button class="chkbtn" id="co">${UI.check}</button>`:''}`;}
+function rMatch(e){const L2=e.pairs.map(p=>p[0]),R=e.pairs.map(p=>p[1]);return`<div class="q">${UI.match||'Match'}</div><div class="mwrap"><div class="mcol">${L2.map(w=>{const dn=S.md.some(d=>d[0]===w);return`<button class="mbtn ${dn?'hit':S.ms===w?'sel':''}" data-ml="${w}">${w}</button>`;}).join('')}</div><div class="mcol">${R.map(w=>{const dn=S.md.some(d=>d[1]===w);return`<button class="mbtn ${dn?'hit':''}" data-mr="${w}">${w}</button>`;}).join('')}</div></div>`;}
+function rComp(){const ac=S.tot>0?Math.round(S.sc/S.tot*100):100;return`<div class="card comp"><span class="troph">🏆</span><div class="ctit">${UI.lc}</div><div class="stats"><div class="stat"><div class="sv">+${S.xp}</div><div class="sl">${UI.xp}</div></div><div class="stat"><div class="sv">${ac}%</div><div class="sl">${UI.acc2}</div></div><div class="stat"><div class="sv">${S.lives}</div><div class="sl">❤️ ${UI.lives}</div></div></div><button class="conbtn" id="hb">${UI.back||'←'}</button></div>`;}
+ 
 // ═══════════════════════════════════════
 // EVENT BINDING
 // ═══════════════════════════════════════
 function bind(){
-  // HOME
-  document.querySelectorAll('[data-li]').forEach(b=>{
-    b.addEventListener('click',()=>{
-      S.lessonIdx=+b.dataset.li; S.exIdx=0;
-      S.feedback=null; S.woAns=[]; S.matchSel=null; S.matchDone=[];
-      S.score=0; S.total=0; S.screen='exercise'; render();
-    });
-  });
-
-  // LISTEN
-  const lb=$('lisBtn');
-  if(lb)lb.addEventListener('click',()=>speak(ex().word,CFG.catLang));
-
-  // TRANSLATE / LISTEN options
-  document.querySelectorAll('[data-oi]').forEach(b=>{
-    b.addEventListener('click',()=>{
-      if(S.feedback)return;
-      const e=ex(), chosen=+b.dataset.oi; S.total++;
-      if(chosen===e.correct){S.feedback={ok:true,chosen};S.score++;S.xp+=10;}
-      else{S.feedback={ok:false,chosen,ans:e.options[e.correct]};S.lives=Math.max(0,S.lives-1);}
-      render();
-    });
-  });
-
-  // FILL options
-  document.querySelectorAll('[data-fw]').forEach(b=>{
-    b.addEventListener('click',()=>{
-      if(S.feedback)return;
-      const e=ex(), w=b.dataset.fw; S.total++;
-      if(w===e.blank){S.feedback={ok:true,chosen:w};S.score++;S.xp+=10;}
-      else{S.feedback={ok:false,chosen:w,ans:e.blank};S.lives=Math.max(0,S.lives-1);}
-      render();
-    });
-  });
-
-  // WORD ORDER — bank → drop
-  document.querySelectorAll('[data-bi]').forEach(b=>{
-    b.addEventListener('click',()=>{
-      if(S.feedback)return;
-      const w=b.textContent;
-      if(!S.woAns.includes(w)){S.woAns=[...S.woAns,w];render();}
-    });
-  });
-  // WORD ORDER — drop → bank (remove)
-  document.querySelectorAll('[data-di]').forEach(b=>{
-    b.addEventListener('click',()=>{
-      if(S.feedback)return;
-      S.woAns=S.woAns.filter((_,i)=>i!==+b.dataset.di);render();
-    });
-  });
-  // WORD ORDER — check
-  const co=$('chkOrd');
-  if(co)co.addEventListener('click',()=>{
-    const e=ex(); S.total++;
-    if(S.woAns.join(' ')===e.cat){S.feedback={ok:true,ans:e.cat};S.score++;S.xp+=15;}
-    else{S.feedback={ok:false,ans:e.cat};S.lives=Math.max(0,S.lives-1);}
+ 
+  // HOME → mode selector
+  document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',e=>{
+    e.stopPropagation();
+    S.li=+b.dataset.li;
+    if(b.dataset.mode==='ex'){
+      S.ei=0;S.fb=null;S.wa=[];S.ms=null;S.md=[];S.sc=0;S.tot=0;
+      S.screen='exercise';
+    } else {
+      S.screen='games';
+    }
     render();
-  });
-
-  // MATCH — left
-  document.querySelectorAll('[data-ml]').forEach(b=>{
-    b.addEventListener('click',()=>{
-      if(S.matchDone.some(d=>d[0]===b.dataset.ml))return;
-      S.matchSel=b.dataset.ml; render();
+  }));
+ 
+  // BACK buttons
+  const bh=$('backHome');  if(bh)bh.addEventListener('click',()=>{S.screen='home';render();});
+  const bh2=$('backHome2');if(bh2)bh2.addEventListener('click',()=>{S.screen='home';render();});
+  const bg=$('backGames'); if(bg)bg.addEventListener('click',()=>{S.screen='games';render();});
+ 
+  // GAMES MENU
+  const gw=$('goWS');   if(gw)gw.addEventListener('click',()=>{S.wsFound=[];S.wsSelecting=[];S.screen='wordsearch';render();});
+  const gd=$('goDiff'); if(gd)gd.addEventListener('click',()=>{S.diffsFound=[];S.diffClicks=[];S.screen='differences';render();});
+ 
+  // ── WORD SEARCH ──
+  // Drag/click per seleccionar paraules
+  let wsMouseDown=false, wsStart=null;
+  document.querySelectorAll('.ws-cell').forEach(cell=>{
+    cell.addEventListener('mousedown',e=>{
+      wsMouseDown=true;
+      wsStart={r:+cell.dataset.r,c:+cell.dataset.c};
+      S.wsSelecting=[wsStart];render();
     });
-  });
-  // MATCH — right
-  document.querySelectorAll('[data-mr]').forEach(b=>{
-    b.addEventListener('click',()=>{
-      if(!S.matchSel||S.matchDone.some(d=>d[1]===b.dataset.mr))return;
-      const e=ex(), pair=e.pairs.find(p=>p[0]===S.matchSel);
-      if(pair&&pair[1]===b.dataset.mr){
-        S.matchDone=[...S.matchDone,[S.matchSel,b.dataset.mr]];
-        S.xp+=5;
-        if(S.matchDone.length===e.pairs.length){
-          S.feedback={ok:true,ans:''};S.score++;S.total++;
-        }
-      }else{
-        S.lives=Math.max(0,S.lives-1);
-        b.classList.add('miss');
-        setTimeout(()=>b.classList.remove('miss'),400);
+    cell.addEventListener('mousemove',()=>{
+      if(!wsMouseDown||!wsStart)return;
+      const r=+cell.dataset.r,c=+cell.dataset.c;
+      // Calcula la línia entre start i current
+      S.wsSelecting=getCellsInLine(wsStart,{r,c});render();
+    });
+    cell.addEventListener('mouseup',()=>{
+      wsMouseDown=false;checkWordSelection();wsStart=null;
+    });
+    // Touch
+    cell.addEventListener('touchstart',e=>{
+      e.preventDefault();wsMouseDown=true;
+      wsStart={r:+cell.dataset.r,c:+cell.dataset.c};
+      S.wsSelecting=[wsStart];render();
+    },{passive:false});
+    cell.addEventListener('touchmove',e=>{
+      e.preventDefault();
+      const touch=e.touches[0];
+      const el=document.elementFromPoint(touch.clientX,touch.clientY);
+      if(el&&el.classList.contains('ws-cell')){
+        S.wsSelecting=getCellsInLine(wsStart,{r:+el.dataset.r,c:+el.dataset.c});render();
       }
-      S.matchSel=null; render();
+    },{passive:false});
+    cell.addEventListener('touchend',()=>{wsMouseDown=false;checkWordSelection();wsStart=null;});
+  });
+  document.addEventListener('mouseup',()=>{if(wsMouseDown){wsMouseDown=false;checkWordSelection();wsStart=null;}});
+ 
+  const wsR=$('wsReset');if(wsR)wsR.addEventListener('click',()=>{S.wsFound=[];S.wsSelecting=[];render();});
+ 
+  // ── 7 DIFERÈNCIES ──
+  ['imgA','imgB'].forEach(id=>{
+    const wrap=$(id);
+    if(!wrap)return;
+    wrap.addEventListener('click',e=>{
+      const rect=wrap.getBoundingClientRect();
+      const svgEl=wrap.querySelector('svg');
+      if(!svgEl)return;
+      const svgRect=svgEl.getBoundingClientRect();
+      // Converteix a coordenades del viewBox (0-400, 0-300)
+      const px=(e.clientX-svgRect.left)/svgRect.width*400;
+      const py=(e.clientY-svgRect.top)/svgRect.height*300;
+      checkDifference(px,py,id);
     });
   });
-
-  // CONTINUE
-  const cb=$('contBtn');
-  if(cb)cb.addEventListener('click',()=>{
-    S.feedback=null; S.woAns=[]; S.matchSel=null; S.matchDone=[];
-    if(S.exIdx<lesson().exercises.length-1){S.exIdx++;}
-    else{S.completed.add(S.lessonIdx);S.screen='complete';}
+  const dr=$('diffReset');if(dr)dr.addEventListener('click',()=>{S.diffsFound=[];S.diffClicks=[];render();});
+ 
+  // ── EXERCISES ──
+  const lb=$('lb');if(lb)lb.addEventListener('click',()=>speak(E().word,'ca-ES'));
+  document.querySelectorAll('[data-oi]').forEach(b=>b.addEventListener('click',()=>{
+    if(S.fb)return;const e=E(),c=+b.dataset.oi;S.tot++;
+    if(c===e.correct){S.fb={ok:true,chosen:c};S.sc++;S.xp+=10;}
+    else{S.fb={ok:false,chosen:c,ans:e.options[e.correct]};S.lives=Math.max(0,S.lives-1);}
+    render();
+  }));
+  document.querySelectorAll('[data-fw]').forEach(b=>b.addEventListener('click',()=>{
+    if(S.fb)return;const e=E(),w=b.dataset.fw;S.tot++;
+    if(w===e.blank){S.fb={ok:true,chosen:w};S.sc++;S.xp+=10;}
+    else{S.fb={ok:false,chosen:w,ans:e.blank};S.lives=Math.max(0,S.lives-1);}
+    render();
+  }));
+  document.querySelectorAll('[data-bi]').forEach(b=>b.addEventListener('click',()=>{
+    if(S.fb)return;const w=b.textContent;if(!S.wa.includes(w)){S.wa=[...S.wa,w];render();}
+  }));
+  document.querySelectorAll('[data-di]').forEach(b=>b.addEventListener('click',()=>{
+    if(S.fb)return;S.wa=S.wa.filter((_,i)=>i!==+b.dataset.di);render();
+  }));
+  const co=$('co');if(co)co.addEventListener('click',()=>{
+    const e=E();S.tot++;
+    if(S.wa.join(' ')===e.cat){S.fb={ok:true,ans:e.cat};S.sc++;S.xp+=15;}
+    else{S.fb={ok:false,ans:e.cat};S.lives=Math.max(0,S.lives-1);}
     render();
   });
-
-  // HOME BTN
-  const hb=$('homeBtn');
-  if(hb)hb.addEventListener('click',()=>{S.screen='home';render();});
+  document.querySelectorAll('[data-ml]').forEach(b=>b.addEventListener('click',()=>{
+    if(S.md.some(d=>d[0]===b.dataset.ml))return;S.ms=b.dataset.ml;render();
+  }));
+  document.querySelectorAll('[data-mr]').forEach(b=>b.addEventListener('click',()=>{
+    if(!S.ms||S.md.some(d=>d[1]===b.dataset.mr))return;
+    const e=E(),p=e.pairs.find(p=>p[0]===S.ms);
+    if(p&&p[1]===b.dataset.mr){
+      S.md=[...S.md,[S.ms,b.dataset.mr]];S.xp+=5;
+      if(S.md.length===e.pairs.length){S.fb={ok:true,ans:''};S.sc++;S.tot++;}
+    }else{S.lives=Math.max(0,S.lives-1);b.classList.add('miss');setTimeout(()=>b.classList.remove('miss'),400);}
+    S.ms=null;render();
+  }));
+  const cb=$('cb');if(cb)cb.addEventListener('click',()=>{
+    S.fb=null;S.wa=[];S.ms=null;S.md=[];
+    if(S.ei<L().exercises.length-1)S.ei++;
+    else{S.done.add(S.li);S.screen='complete';}
+    render();
+  });
+  const hb=$('hb');if(hb)hb.addEventListener('click',()=>{S.screen='home';render();});
 }
-
+ 
+// ═══════════════════════════════════════
+// WORD SEARCH LOGIC
+// ═══════════════════════════════════════
+function getCellsInLine(start,end){
+  if(!start||!end)return[];
+  const dr=end.r-start.r, dc=end.c-start.c;
+  const len=Math.max(Math.abs(dr),Math.abs(dc));
+  if(len===0)return[start];
+  const sr=dr===0?0:dr/Math.abs(dr), sc=dc===0?0:dc/Math.abs(dc);
+  // Permet 8 direccions
+  if(Math.abs(dr)!==Math.abs(dc)&&dr!==0&&dc!==0){
+    // No diagonal pura - agafa la direcció dominant
+    if(Math.abs(dr)>Math.abs(dc))return getCellsInLine(start,{r:end.r,c:start.c});
+    else return getCellsInLine(start,{r:start.r,c:end.c});
+  }
+  const cells=[];
+  for(let i=0;i<=len;i++)cells.push({r:start.r+sr*i,c:start.c+sc*i});
+  return cells;
+}
+ 
+function checkWordSelection(){
+  const sel=S.wsSelecting;
+  if(sel.length<2){S.wsSelecting=[];render();return;}
+  const selWord=sel.map(c=>GDL().wordsearch.grid[c.r][c.c]).join('');
+  const ws=GDL().wordsearch;
+  let matched=null;
+  ws.placements.forEach(p=>{
+    if(p.word===selWord&&!S.wsFound.includes(p.word))matched=p.word;
+    // Prova a l'inrevés
+    if(p.word===selWord.split('').reverse().join('')&&!S.wsFound.includes(p.word))matched=p.word;
+  });
+  if(matched){
+    S.wsFound=[...S.wsFound,matched];
+    S.xp+=5;
+    if(S.wsFound.length>=ws.words.length)S.xp+=20;
+  }
+  S.wsSelecting=[];render();
+}
+ 
+// ═══════════════════════════════════════
+// DIFFERENCES LOGIC
+// ═══════════════════════════════════════
+function checkDifference(px,py,imgId){
+  const df=GDL().differences;
+  // Només comprova a la imatge B
+  if(imgId!=='imgB')return;
+  let found=false;
+  df.diffs.forEach((d,i)=>{
+    if(S.diffsFound.includes(i))return;
+    const dist=Math.sqrt((px-d.x)**2+(py-d.y)**2);
+    if(dist<=d.r){
+      S.diffsFound=[...S.diffsFound,i];
+      S.xp+=10;
+      found=true;
+      // Animació visual
+      showDiffIndicator(imgId,px,py,true);
+      if(S.diffsFound.length>=7)S.xp+=30;
+    }
+  });
+  if(!found)showDiffIndicator(imgId,px,py,false);
+  render();
+}
+ 
+function showDiffIndicator(imgId,px,py,ok){
+  // Renderitzem primer, després afegim el flash
+  setTimeout(()=>{
+    const wrap=$(imgId);if(!wrap)return;
+    const svgEl=wrap.querySelector('svg');if(!svgEl)return;
+    const svgRect=svgEl.getBoundingClientRect();
+    const div=document.createElement('div');
+    div.className='diff-click-indicator';
+    div.style.cssText=`left:${px/400*svgRect.width+svgRect.left-wrap.getBoundingClientRect().left-20}px;top:${py/300*svgRect.height+svgRect.top-wrap.getBoundingClientRect().top-20}px;width:40px;height:40px;border-color:${ok?'#58cc02':'#ff4b4b'}`;
+    wrap.appendChild(div);
+    setTimeout(()=>div.remove(),700);
+  },50);
+}
+ 
 render();
 </script>
 </body>
